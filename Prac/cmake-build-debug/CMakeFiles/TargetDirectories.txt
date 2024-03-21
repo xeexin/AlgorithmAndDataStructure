@@ -1,3 +1,0 @@
-/Users/heejin/Documents/CodingTest/AlgorithmAndDataStructure/Prac/cmake-build-debug/CMakeFiles/codingTestPrac.dir
-/Users/heejin/Documents/CodingTest/AlgorithmAndDataStructure/Prac/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/heejin/Documents/CodingTest/AlgorithmAndDataStructure/Prac/cmake-build-debug/CMakeFiles/rebuild_cache.dir
