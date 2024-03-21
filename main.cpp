@@ -1,39 +1,22 @@
-// 비트배열 후 맥스 값 출력
+// dat
+//vect 배열에 arr 값이 몇개씩 있는지 출력하기
 
 #include<iostream>
 using namespace std;
-int arr[3][4]={
-        3,5,6,1,
-        2,4,2,5,
-        1,2,3,4
-};
-int bit[2][2] = {
-        1, 1,
-        1, 0
-};
-int getSum(int dy, int dx){
-    int sum = 0;
-    for (int y = 0; y < 2; y++) {
-        for (int x = 0; x < 2; x++) {
-            if (bit[y][x] == 1) {
-                sum += arr[dy + y][dx + x];
-            }
-        }
-    }
-    return sum;
-}
 int main(){
+    int vect[8] = {3, 7, 2, 3, 4, 1, 2, 4};
+    int arr[5] = {0, 1, 3, 5, 7};
 
-    int MAX = -21e8;
+    int bucket[10] = {0};
 
-    for (int y = 0; y <= 3 - 2; y++) {
-        for (int x = 0; x <= 4 - 2; x++) {
-            int sum = getSum(y, x);
-            if(sum > MAX) MAX = sum;
-        }
+    for (int x = 0; x < 8; x++) {
+        bucket[vect[x]]++;
     }
 
-    cout << "최댓값은 " << MAX;
+    for (int x = 0; x < 5; x++) {
+        int idx = arr[x];
+        cout << idx << "이(가)" << bucket[idx] << "개 있습니다.\n" ;
+    }
 
     return 0;
 }
