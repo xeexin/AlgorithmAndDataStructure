@@ -1,0 +1,3 @@
+/Users/heejin/Documents/IntelliJ/codingTestPrac/cmake-build-debug/CMakeFiles/codingTestPrac.dir
+/Users/heejin/Documents/IntelliJ/codingTestPrac/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/heejin/Documents/IntelliJ/codingTestPrac/cmake-build-debug/CMakeFiles/rebuild_cache.dir
