@@ -2,6 +2,42 @@
 	"entries" : 
 	[
 		{
+			"name" : "AlgorithmAndDataStructure_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/Users/heejin/Documents/CodingTest/AlgorithmAndDataStructure/cmake-build-debug"
+		},
+		{
+			"name" : "AlgorithmAndDataStructure_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "ON"
+		},
+		{
+			"name" : "AlgorithmAndDataStructure_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/Users/heejin/Documents/CodingTest/AlgorithmAndDataStructure"
+		},
+		{
 			"name" : "CMAKE_ADDR2LINE",
 			"properties" : 
 			[
@@ -55,7 +91,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/heejin/Documents/IntelliJ/codingTestPrac/cmake-build-debug"
+			"value" : "/Users/heejin/Documents/CodingTest/AlgorithmAndDataStructure/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -479,7 +515,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/heejin/Documents/IntelliJ/codingTestPrac/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "/Users/heejin/Documents/CodingTest/AlgorithmAndDataStructure/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -539,7 +575,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/heejin/Documents/IntelliJ/codingTestPrac"
+			"value" : "/Users/heejin/Documents/CodingTest/AlgorithmAndDataStructure"
 		},
 		{
 			"name" : "CMAKE_INSTALL_NAME_TOOL",
@@ -819,7 +855,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "codingTestPrac"
+			"value" : "AlgorithmAndDataStructure"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1100,42 +1136,6 @@
 			],
 			"type" : "BOOL",
 			"value" : "FALSE"
-		},
-		{
-			"name" : "codingTestPrac_BINARY_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "/Users/heejin/Documents/IntelliJ/codingTestPrac/cmake-build-debug"
-		},
-		{
-			"name" : "codingTestPrac_IS_TOP_LEVEL",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "ON"
-		},
-		{
-			"name" : "codingTestPrac_SOURCE_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "/Users/heejin/Documents/IntelliJ/codingTestPrac"
 		}
 	],
 	"kind" : "cache",

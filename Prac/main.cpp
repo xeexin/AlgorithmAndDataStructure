@@ -10,8 +10,8 @@ int main(){
     int arr[n];
     int brr[m];
 
-    for(int )
-
+    cin >> n;
+    cout << "hee";
 
     return 0;
 }

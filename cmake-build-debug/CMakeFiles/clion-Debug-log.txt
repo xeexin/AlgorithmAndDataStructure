@@ -1,4 +1,4 @@
-"/Users/heejin/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/232.9921.42/CLion.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=/Users/heejin/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/232.9921.42/CLion.app/Contents/bin/ninja/mac/ninja" -G Ninja -S /Users/heejin/Documents/CodingTest/AlgorithmAndDataStructure/Prac -B /Users/heejin/Documents/CodingTest/AlgorithmAndDataStructure/Prac/cmake-build-debug
+"/Users/heejin/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/232.9921.42/CLion.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=/Users/heejin/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/232.9921.42/CLion.app/Contents/bin/ninja/mac/ninja" -G Ninja -S /Users/heejin/Documents/CodingTest/AlgorithmAndDataStructure -B /Users/heejin/Documents/CodingTest/AlgorithmAndDataStructure/cmake-build-debug
 -- The C compiler identification is AppleClang 15.0.0.15000040
 -- The CXX compiler identification is AppleClang 15.0.0.15000040
 -- Detecting C compiler ABI info
@@ -11,6 +11,6 @@
 -- Check for working CXX compiler: /Library/Developer/CommandLineTools/usr/bin/c++ - skipped
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
--- Configuring done (7.0s)
+-- Configuring done (1.5s)
 -- Generating done (0.0s)
--- Build files have been written to: /Users/heejin/Documents/CodingTest/AlgorithmAndDataStructure/Prac/cmake-build-debug
+-- Build files have been written to: /Users/heejin/Documents/CodingTest/AlgorithmAndDataStructure/cmake-build-debug

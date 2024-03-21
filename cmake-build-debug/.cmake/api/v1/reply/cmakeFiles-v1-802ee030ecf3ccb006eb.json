@@ -1163,8 +1163,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "/Users/heejin/Documents/IntelliJ/codingTestPrac/cmake-build-debug",
-		"source" : "/Users/heejin/Documents/IntelliJ/codingTestPrac"
+		"build" : "/Users/heejin/Documents/CodingTest/AlgorithmAndDataStructure/cmake-build-debug",
+		"source" : "/Users/heejin/Documents/CodingTest/AlgorithmAndDataStructure"
 	},
 	"version" : 
 	{
