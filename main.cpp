@@ -1,38 +1,39 @@
-// 몇층에 있나요?
+// 비트배열 후 맥스 값 출력
 
 #include<iostream>
 using namespace std;
-int arr[9][3]={
-        3,5,1,
-        2,3,6,
-        3,6,1,
-        3,1,1,
-        4,5,6,
-        2,4,5,
-        7,3,4,
-        5,7,2,
-        8,6,4
+int arr[3][4]={
+        3,5,6,1,
+        2,4,2,5,
+        1,2,3,4
 };
-
-int find(int idx, int target[3]) {
-    for (int x = 0; x < 3; x++) {
-        if (arr[idx][x] != target[x]) {
-            return 0;
+int bit[2][2] = {
+        1, 1,
+        1, 0
+};
+int getSum(int dy, int dx){
+    int sum = 0;
+    for (int y = 0; y < 2; y++) {
+        for (int x = 0; x < 2; x++) {
+            if (bit[y][x] == 1) {
+                sum += arr[dy + y][dx + x];
+            }
         }
     }
-    return 1;
-    
+    return sum;
 }
 int main(){
 
-    int target[3] = {3, 6, 1};
+    int MAX = -21e8;
 
-    for (int x = 0; x < 9; x++) {
-        int ret = find(x, target);
-        if (ret == 1) {
-            cout << 9 - x << "층에 거주 중 ";
+    for (int y = 0; y <= 3 - 2; y++) {
+        for (int x = 0; x <= 4 - 2; x++) {
+            int sum = getSum(y, x);
+            if(sum > MAX) MAX = sum;
         }
     }
+
+    cout << "최댓값은 " << MAX;
 
     return 0;
 }
