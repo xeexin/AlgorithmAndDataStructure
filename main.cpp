@@ -1,4 +1,4 @@
-// dat 1차 배열
+// dat 2차 배열
 // (y,x) 좌표 입력 받고 상하좌우 합 구하기
 
 #include<iostream>
@@ -13,8 +13,10 @@ int main()
     };
 
     // 상, 하, 좌, 우
-    int directY[4] = {-1, 1, 0, 0};
-    int directX[4] = {0, 0, -1, 1};
+    int direct[4][2] = {-1, 0,
+                        1, 0,
+                        0, -1,
+                        0, 1};
 
     //입력
     int y,x;
@@ -23,8 +25,8 @@ int main()
     int sum=0;
 
     for (int t = 0; t < 4; t++) {
-        int dy = y + directY[t];
-        int dx = x + directX[t];
+        int dy = y+ direct[t][0];
+        int dx = x + direct[t][1];
 
         if(dy<0 || dy>3 || dx<0 || dx>3) continue;
 
