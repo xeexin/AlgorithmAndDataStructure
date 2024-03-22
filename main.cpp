@@ -1,22 +1,36 @@
 // dat
-//vect 배열에 arr 값이 몇개씩 있는지 출력하기
+//brr 배열에 있는 문자가 arr에 몇개 있는지 출력
 
 #include<iostream>
 using namespace std;
-int main(){
-    int vect[8] = {3, 7, 2, 3, 4, 1, 2, 4};
-    int arr[5] = {0, 1, 3, 5, 7};
+int main()
+{
 
-    int bucket[10] = {0};
+    char arr[10] = "NCT127";
+    char brr[20] = "NCT127BTSRIZE";
+    char bucket[200] = {0};
 
-    for (int x = 0; x < 8; x++) {
-        bucket[vect[x]]++;
+    //brr 배열 길이 구하기
+    int len;
+    for (int x = 0; x < 20; x++) {
+        if (brr[x] == NULL) {
+            len=x;
+            break;
+        }
     }
 
-    for (int x = 0; x < 5; x++) {
-        int idx = arr[x];
-        cout << idx << "이(가)" << bucket[idx] << "개 있습니다.\n" ;
+    for (int x = 0; x < len; x++) {
+        bucket[brr[x]]++;
     }
+
+    int cnt = 0;
+    for (int x = 0; x < 6; x++) {
+        if (bucket[arr[x]] > 0) {
+            cnt++;
+        }
+    }
+
+    cout << cnt;
 
     return 0;
 }
