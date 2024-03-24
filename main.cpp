@@ -1,33 +1,32 @@
-//bfs
-// [주사위] 숫자 n개 입력 받고 n개의 모든 주사위 수 구하기
+/*7 3 1 2 카드 - 3묶음
+각 묶음에서 1개씩 뽑아서 더할 경우, 합이 10이 나오는 경우?
+[path안써서]*/
+
 #include<iostream>
 using namespace std;
-int n;
-int path[6];
 
-void abc(int lev){
+// char path[20];
+int cardList[4] = { 7,3,1,2 };
+int cnt = 0;
 
+void card(int lev, int sum) {
     //종료 조건
-    if (lev == n) {
-        //출력
-        for (int x = 0; x < n; x++) {
-            cout << path[x] << " ";
-        }
-        cout << "\n";
+    if(sum >10)return;
+
+    if (lev == 3 && sum == 10){
+        cnt++;
         return;
     }
 
-    for (int x = 1; x <= 6; x++) {
-        path[lev] = x;
-        abc(lev + 1);
-        path[lev] = 0;
+    for (int x = 0; x < 4; x++) {
+        card(lev + 1, sum + cardList[x]);
     }
-
 }
+
 int main()
 {
-    cin >> n;
-    abc(0);
+    card(0,0);
+    cout << cnt;
 
 
     return 0;
