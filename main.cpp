@@ -1,33 +1,29 @@
-/*7 3 1 2 카드 - 3묶음
-각 묶음에서 1개씩 뽑아서 더할 경우, 합이 10이 나오는 경우?
-[path안써서]*/
+// 중복 X
 
 #include<iostream>
 using namespace std;
+char arr[5] = "ABCD";
+char path[10];
+int visited[4];
+void abc(int lev){
 
-// char path[20];
-int cardList[4] = { 7,3,1,2 };
-int cnt = 0;
-
-void card(int lev, int sum) {
-    //종료 조건
-    if(sum >10)return;
-
-    if (lev == 3 && sum == 10){
-        cnt++;
+    if (lev == 3) {
+        cout << path <<endl;
         return;
     }
-
     for (int x = 0; x < 4; x++) {
-        card(lev + 1, sum + cardList[x]);
+        if(visited[x]==1) continue;
+        visited[x] = 1;
+        path[lev] = arr[x];
+        abc(lev + 1);
+        path[lev] = 0;
+        visited[x] = 0; 
     }
-}
 
+}
 int main()
 {
-    card(0,0);
-    cout << cnt;
-
+    abc(0);
 
     return 0;
 }
