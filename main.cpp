@@ -1,36 +1,32 @@
-/*
-"JAN[[HEY]A[K]]T[HA]]BTS[[W]KT"
-[[ 열리는 대괄호가 2개 이상일 때 안에 파싱
-*/
+// AG#UCG#BTS#KB 파싱하기
 
 #include<iostream>
 #include<string>
 using namespace std;
 int main()
 {
-    string arr = "JAN[[HEY]A[K]]T[HA]]BTS[[W]KT";
+    string arr = "AG#UCG#BTS#KB";
+    string ret[10];
 
+    int idx = 0;
     int a = 0;
     int b;
 
     while (1) {
-        a = arr.find("[", a);
-        if(a==-1) break;
-        b = arr.find("]", a + 1);
-        if(b==-1)break;
+        b = arr.find("#", a);
 
-        while (1) {
-            int c= arr.find("[", a + 1);
-            if(c<b) {
-                a = c;
-                cout << arr.substr(a + 1, b - a - 1) << endl;
-                a = b + 1;
-            }
-            else break;
+        if (b == -1) {
+
+            ret[idx++] = arr.substr(a, arr.length() - a);
+            break;
         }
+        ret[idx++] = arr.substr(a, b - a);
         a = b + 1;
     }
 
+    for (int x = 0; x < idx; x++) {
+        cout << ret[x] << endl;
+    }
 
     return 0;
 }
