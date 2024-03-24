@@ -1,25 +1,19 @@
-/*
-string class를 이용하여 문자열 다루기
-Parcing(파싱): 예) 고객 정보 - 이름 - 나이 - 전번 - 성별 있을 때, 원하는 이름 - 나이 - 전번만 추출
--> 파싱 문제 코테에서 많이 나옴 (금융권, 뱅킹)
-*/
-
+/* 하드코딩 : "AKT[HAHA]GTX"
+        HAHA만 출력하기*/
 
 #include<iostream>
 #include<string>
+
 using namespace std;
-int main()
-{
-    string userID = "KFC";
-    string userPW = "BBQMC";
+int main(){
+    string str = "ATK[HAHA]GTX";
 
-    string ID, PW;
-    cin >> ID >> PW;
+    int idx1 = str.find("[", 0);
+    int idx2 = str.find("]", idx1 + 1);
 
-    if ((userID == ID) && (userPW == PW)) cout << "로그인성공";
-    else if (userID == ID && userPW != PW) cout << "비번오류";
-    else if (userID != ID && userPW != PW) cout << "없는 ID";
-    else cout << "다시 로그인";
+    string ret = str.substr(idx1 + 1, idx2 - idx1 - 1);
 
+    cout << ret;
 
+    return 0;
 }
