@@ -1,5 +1,4 @@
-//2개 조합해서 starbuckskorea 만들기
-
+// 문자(열) 입력 받고, 존재하는지 확인하기
 
 #include<iostream>
 #include<string>
@@ -7,16 +6,26 @@ using namespace std;
 
 int main()
 {
-    string arr[5] = { "star","start","buckskorea","starbucks","korea" };
+    string arr[3] = {
+            "blackpink",
+            "nct",
+            "aespa"
+    };
 
-    for (int y = 0; y < 5-1; y++) {
-        for (int x = y + 1; x < 5; x++) {
-            if (arr[y] + arr[x] == "starbuckskorea") {
-                cout << "[" << y << "] + [" << x << "] = starbuckskorea\n";
-            }
+    string input;
+    cin >> input;
+
+    int flag = 0;
+
+    for (int x = 0; x < 3; x++) {
+        if (arr[x].find(input, 0) != -1) {
+            flag = 1;
+            break;
         }
     }
 
+    if(flag) cout << "FOUND";
+    else cout << "NOT FOUND";
+
+    return 0;
 }
-
-
