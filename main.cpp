@@ -1,19 +1,28 @@
-/* 하드코딩 : "AKT[HAHA]GTX"
-        HAHA만 출력하기*/
+/*
+JAN[HEY]AKT[HA]BTS[WOW]KT 입력
+[ ]안에 있는 값 출력
+*/
 
 #include<iostream>
 #include<string>
-
 using namespace std;
-int main(){
-    string str = "ATK[HAHA]GTX";
 
-    int idx1 = str.find("[", 0);
-    int idx2 = str.find("]", idx1 + 1);
+int main()
+{
+    string arr = "JAN[HEY]AKT[HA]BTS[WOW]KT";
 
-    string ret = str.substr(idx1 + 1, idx2 - idx1 - 1);
+    int a = 0;
+    int b;
 
-    cout << ret;
+    while (1) {
+
+        a = arr.find("[", a);
+        if(a==-1) break;
+
+        b = arr.find("]", a + 1);
+        cout << arr.substr(a + 1, b - a - 1) << endl;
+        a = b + 1;
+    }
 
     return 0;
 }
