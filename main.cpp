@@ -1,24 +1,29 @@
 #include<iostream>
 using namespace std;
+struct Node {
+    int value;
+    Node *next;
+};
+Node *head;
+Node *last;
+
+void addnode(int num) {
+    if (head == NULL) {
+        head = new Node();
+        last = head;
+        head->value = num;
+    } else {
+        last->next = new Node();
+        last = last->next;
+        last->value = num;
+    }
+}
 int main()
 {
-// 중간에 abs를 껴 넣어 주세요 abs
-    string arr = "asdlkfjabslksdabsjfabslksdj";
-// abs 문자열이 몇개 있는지 출력해 주세요~
-    string target = "abs";
+    addnode(3);
+    addnode(4);
+    addnode(5);
 
-    int a = 0;
-    int cnt = 0;
-
-    while (1) {
-        a = arr.find(target, a);
-        if(a==-1)break;
-        a = a + 1;
-        // a += arr.length();
-        cnt++;
-    }
-
-    cout << cnt;
 
     return 0;
 }
