@@ -1,33 +1,48 @@
-// AG#UCG#BTS#KB 파싱하기
-
 #include<iostream>
 #include<string>
 using namespace std;
-int main()
-{
-    string arr = "AG#UCG#BTS#KB";
-    string ret[10];
 
-    int idx = 0;
-    int a = 0;
-    int b;
+int findNum(string &arr, int idx){
+
+    for (int x = idx; x < arr.length(); x++) {
+        if (arr[x] >= '0' && arr[x] <= '9') return x;
+    }
+
+    return -1;
+}
+
+int findChar(string &arr, int idx){
+    for (int x = idx; x < arr.length(); x++) {
+        if (!(arr[x] >= '0' && arr[x] <= '9')) {
+            return x;
+        }
+    }
+    return -1;
+}
+int main(){
+    string arr = "ATS47UK53KOR2G";
+
+    int a,b,sum;
+    a = 0;
+    sum = 0;
 
     while (1) {
-        b = arr.find("#", a);
+        //숫자 찾기
+        a = findNum(arr,a);
+        if(a==-1)break;
 
-        if (b == -1) {
+        //그 다음 문자 찾기
+        b = findChar(arr, a + 1);
+        if(b==-1)break;
 
-            ret[idx++] = arr.substr(a, arr.length() - a);
-            break;
-        }
-        ret[idx++] = arr.substr(a, b - a);
+        string ret = arr.substr(a, b - a);
+        int ret2 = stoi(ret) + 5;
+        sum += ret2;
+
         a = b + 1;
     }
 
-    for (int x = 0; x < idx; x++) {
-        cout << ret[x] << endl;
-    }
+    cout << sum;
 
     return 0;
 }
-
