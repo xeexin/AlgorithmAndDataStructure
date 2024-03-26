@@ -17,24 +17,25 @@ void addnode(int x){
         last->value = x;
     }
 }
-
-void insert(int a, int b){
-    for (Node *p = head; p != NULL; p = p->next) {
-        if (p->value == a) {
-            Node *temp = new Node();
-            temp->value = b;
-            temp->next = p->next;
-            p->next = temp;
-        }
-    }
+int top(){
+    return  head->value;
+}
+void pop(){
+    Node *temp = head;
+    head = head->next;
+    delete temp;
 }
 int main()
 {
-
-    for (int x = 1; x < 5; x++) {
+    for (int x = 1; x <= 50; x++)
+    {
         addnode(x);
     }
-    insert(2, 6);
+    for (int x = 0; x < 50; x++)
+    {
+        cout << top() << " "; // 출력
+        pop(); // 출력후 제거
+    }
 
     return 0;
 }
