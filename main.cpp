@@ -1,41 +1,36 @@
 #include<iostream>
 using namespace std;
-struct Node {
-    int value;
-    Node *next;
+char name[7] = { "AKTBGS" };
+int map[6][6] = {
+        0,1,1,0,0,0,
+        0,0,0,1,1,0,
+        0,0,0,0,0,1,
+        0,0,0,0,0,0,
+        0,0,0,0,0,0,
+        0,0,0,0,0,0
 };
-Node *head, *last;
-
-void addnode(int x){
-    if (head == NULL) {
-        head = new Node();
-        head->value = x;
-        last = head;
-    } else {
-        last->next = new Node();
-        last = last->next;
-        last->value = x;
-    }
-}
-int top(){
-    return  head->value;
-}
-void pop(){
-    Node *temp = head;
-    head = head->next;
-    delete temp;
-}
+struct Node {
+    int idx;
+    int lev;
+};
+Node queue[20] = {{0, 0}};
+int head = 0;
+int tail = 1;
 int main()
 {
-    for (int x = 1; x <= 50; x++)
-    {
-        addnode(x);
+    while (head != tail) {
+        Node now = queue[head++];
+        cout << name[now.idx] << " ";
+        for (int x = 0; x < 6; x++) {
+            if (map[now.idx][x] == 1) {
+                queue[tail++] = {x, now.lev + 1};
+            }
+        }
     }
-    for (int x = 0; x < 50; x++)
-    {
-        cout << top() << " "; // 출력
-        pop(); // 출력후 제거
-    }
+
+
 
     return 0;
 }
+
+
