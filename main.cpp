@@ -1,36 +1,32 @@
 #include<iostream>
 using namespace std;
-char name[7] = { "AKTBGS" };
-int map[6][6] = {
-        0,1,1,0,0,0,
-        0,0,0,1,1,0,
-        0,0,0,0,0,1,
-        0,0,0,0,0,0,
-        0,0,0,0,0,0,
-        0,0,0,0,0,0
+char name[6] = { "ABCDE" };
+int map[5][5] = {
+        0,1,1,0,0,
+        0,0,0,1,1,
+        0,0,0,0,0,
+        0,0,0,0,0,
+        0,0,0,0,0,
 };
-struct Node {
-    int idx;
-    int lev;
-};
-Node queue[20] = {{0, 0}};
-int head = 0;
-int tail = 1;
-int main()
-{
-    while (head != tail) {
-        Node now = queue[head++];
-        cout << name[now.idx] << " ";
-        for (int x = 0; x < 6; x++) {
-            if (map[now.idx][x] == 1) {
-                queue[tail++] = {x, now.lev + 1};
-            }
+char path[10];
+void dfs(int now, int lev){
+    cout << path << endl;
+
+    for (int x = 0; x < 5; x++) {
+        if (map[now][x] == 1) {
+            path[lev + 1] = name[x];
+            dfs(x, lev + 1);
+            path[lev + 1] = 0;
+            
         }
     }
+}
+int main()
+{
 
+    path[0] = name[0]; //초기화
 
+    dfs(0, 0);
 
     return 0;
 }
-
-
