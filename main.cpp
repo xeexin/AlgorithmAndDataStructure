@@ -1,26 +1,46 @@
-//이진트리 : 일차배열 path 출력
+// 꽃이 피네요
+// bfs
+
 #include<iostream>
 using namespace std;
-char arr[10] = " ABC  DE"; //이진트리 1차 배열
-char path[10];
-
-void dfs(int now, int lev){
-    //종료 조건
-    if (now >= 10)return; //배열 길이 초과
-    if (arr[now] == ' ' || arr[now] == '\0') return; // 공백이거나 널 일경우
-
-    path[lev + 1] = arr[now * 2];
-    dfs(now * 2, lev + 1);
-
-    path[lev + 1] = arr[now * 2 + 1];
-    dfs(now * 2 + 1, lev + 1);
-
-    path[lev + 1] = 0;
-
-}
+int map[4][4];
+struct Node {
+    int y, x;
+    int lev;
+};
+int head=0;
+int tail = 1;
+Node queue[30] = {{3, 2, 1}};
+int direct[4][2] = {
+        -1, 0,
+        1, 0,
+        0, -1,
+        0, 1
+};
 int main()
 {
-    path[0] = arr[1]; // 'A'
-    dfs(1, 0);
+    map[3][2] = 1;
+    int answer = 0;
+
+    while (head != tail) {
+        Node now = queue[head++];
+        answer = now.lev;
+        for (int t = 0; t < 4; t++) {
+            int dy = now.y + direct[t][0];
+            int dx = now.x + direct[t][1];
+            if (dy < 0 || dy > 3 || dx < 0 || dx > 3) continue;
+            if(map[dy][dx]!=0)continue;
+
+            map[dy][dx] = map[now.y][now.x] + 1;
+            queue[tail++] = {dy, dx, now.lev + 1};
+        };
+
+        }
+    cout << answer << "일차에 꽃이 만개 합니다 :) ";
+
+
     return 0;
 }
+
+
+
