@@ -7,42 +7,37 @@ int map[4][4] = {
         1,1,0,1,
         0,0,0,0,
 };
-struct Node {
+struct node {
     int idx;
     int lev;
-} queue[20];
-int used[4];
+    int used[4];
+} queue[30];
 
-void bfs(int stIdx){
-    queue[0] = {stIdx, 0};
+int main() {
+    int cnt = 0;
 
     int head = 0;
     int tail = 1;
 
+    queue[0]={0,0,{1,0,0,0}}; //시작 인덱스 'A'
+
     while (head != tail) {
-        Node now = queue[head++];
-        cout << name[now.idx];
+
+        node now = queue[head++];
+
+        if (name[now.idx] == 'D') cnt++;  //도착 인덱스 'D'
 
         for (int x = 0; x < 4; x++) {
-            if (map[now.idx][x] == 1 && used[x] == 0) {
-                used[x] = 1;
-                queue[tail++] = {x, now.lev + 1};
+            if (map[now.idx][x] == 1 && now.used[x] == 0) {
+                queue[tail] = now;
+                queue[tail].idx = x;
+                queue[tail].lev = now.lev + 1;
+                queue[tail].used[x] = 1;
+                tail++;
+            }
             }
         }
-    }
-}
-int main()
-{
-    char start;
-    cin >> start;
-
-    for (int x = 0; x < 4; x++) {
-        if (name[x] = start) {
-            used[x] = 1;
-            bfs(x);
-        }
-    }
-
-
+    cout << cnt;
+    
     return 0;
 }
