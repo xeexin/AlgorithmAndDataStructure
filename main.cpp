@@ -1,46 +1,48 @@
-// 꽃이 피네요
-// bfs
-
 #include<iostream>
 using namespace std;
-int map[4][4];
+char name[5] = "ABCD";
+int map[4][4] = {
+        0,1,1,0,
+        0,0,1,1,
+        1,1,0,1,
+        0,0,0,0,
+};
 struct Node {
-    int y, x;
+    int idx;
     int lev;
-};
-int head=0;
-int tail = 1;
-Node queue[30] = {{3, 2, 1}};
-int direct[4][2] = {
-        -1, 0,
-        1, 0,
-        0, -1,
-        0, 1
-};
-int main()
-{
-    map[3][2] = 1;
-    int answer = 0;
+} queue[20];
+int used[4];
+
+void bfs(int stIdx){
+    queue[0] = {stIdx, 0};
+
+    int head = 0;
+    int tail = 1;
 
     while (head != tail) {
         Node now = queue[head++];
-        answer = now.lev;
-        for (int t = 0; t < 4; t++) {
-            int dy = now.y + direct[t][0];
-            int dx = now.x + direct[t][1];
-            if (dy < 0 || dy > 3 || dx < 0 || dx > 3) continue;
-            if(map[dy][dx]!=0)continue;
+        cout << name[now.idx];
 
-            map[dy][dx] = map[now.y][now.x] + 1;
-            queue[tail++] = {dy, dx, now.lev + 1};
-        };
-
+        for (int x = 0; x < 4; x++) {
+            if (map[now.idx][x] == 1 && used[x] == 0) {
+                used[x] = 1;
+                queue[tail++] = {x, now.lev + 1};
+            }
         }
-    cout << answer << "일차에 꽃이 만개 합니다 :) ";
+    }
+}
+int main()
+{
+    char start;
+    cin >> start;
+
+    for (int x = 0; x < 4; x++) {
+        if (name[x] = start) {
+            used[x] = 1;
+            bfs(x);
+        }
+    }
 
 
     return 0;
 }
-
-
-
