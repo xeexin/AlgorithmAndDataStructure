@@ -1,43 +1,40 @@
 #include<iostream>
 using namespace std;
-char name[5] = "ABCD";
-int map[4][4] = {
-        0,1,1,0,
-        0,0,1,1,
-        1,1,0,1,
-        0,0,0,0,
+char name[6] = "ABTKG";
+int map[5][5] = {
+	0,1,1,0,0,
+	0,0,1,1,1,
+	0,1,0,1,0,
+	0,0,0,0,0,
+	0,0,0,0,0,
 };
-struct node {
-    int idx;
-    int lev;
-    int used[4];
-} queue[30];
+int used[6];
 
-int main() {
-    int cnt = 0;
+void dfs(int now){
+    cout << name[now] << " ";
 
-    int head = 0;
-    int tail = 1;
-
-    queue[0]={0,0,{1,0,0,0}}; //시작 인덱스 'A'
-
-    while (head != tail) {
-
-        node now = queue[head++];
-
-        if (name[now.idx] == 'D') cnt++;  //도착 인덱스 'D'
-
-        for (int x = 0; x < 4; x++) {
-            if (map[now.idx][x] == 1 && now.used[x] == 0) {
-                queue[tail] = now;
-                queue[tail].idx = x;
-                queue[tail].lev = now.lev + 1;
-                queue[tail].used[x] = 1;
-                tail++;
-            }
-            }
+    for (int x = 0; x < 5; x++) {
+        if (map[now][x] == 1 && used[x] == 0) {
+            used[x] = 1;
+            dfs(x);
         }
-    cout << cnt;
-    
-    return 0;
+    }
+}
+
+int main()
+{
+	char st;
+	cin >> st;
+
+    int idx = 0;
+    for (int x = 0; x < 5; x++) {
+        if (name[x] == st) {
+            idx = x;
+            break;
+        }
+    }
+    used[idx] = 1;
+    dfs(idx);
+
+	return 0;
 }
