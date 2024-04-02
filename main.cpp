@@ -1,48 +1,44 @@
 #include<iostream>
 using namespace std;
-char name[6] = "ABTKG";
+int rate[5] = { 0,3,1,4,1 };
 int map[5][5] = {
         0,1,1,0,0,
-        0,0,1,1,1,
-        1,1,0,1,0,
-        0,1,0,0,0,
-        0,0,0,0,0,
+        1,0,0,1,1,
+        1,0,0,1,0,
+        0,1,1,0,1,
+        0,1,0,1,0,
 };
+int stindex = 0;
+int edindex = 4;
+
 int used[5];
-int cnt;
+int MIN = 21e8;
+void dfs(int now, int sum){
 
-void dfs(int now, int edIdx){
+    if(sum > MIN)return;
 
-    //도착지 도착
-    if (now == edIdx) {
-        cnt++;
+    if (now == edindex) {
+        if (sum < MIN) {
+            MIN = sum;
+            return;
+        }
     }
 
     for (int x = 0; x < 5; x++) {
-        if (used[x] == 0 && map[now][x] == 1) {
+        if (map[now][x] == 1 && used[x] == 0) {
             used[x] = 1;
-            dfs(x, edIdx);
-            used[x] = 0;  //갔다 오면 0으로 초기화 해주기
+            dfs(x, sum + rate[x]); // += 사용하면 안됨!!
+            used[x] = 0;
         }
     }
+
 }
 int main()
 {
-    char st, ed;
-    cin >> st >> ed;
+    used[stindex] = 1;
+    dfs(stindex, rate[stindex]);
 
-    int stidx, edidx;
-
-    // 시작지와 도착지 인덱스 찾기
-    for (int x = 0; x < 5; x++) {
-        if (name[x] == st) stidx = x;
-        if(name[x]==ed) edidx = x;
-    }
-
-    used[stidx] = 1;
-    dfs(stidx, edidx);
-
-    cout << cnt << "개의 루트가 있음";
+    cout << MIN;
 
     return 0;
 }
