@@ -1,44 +1,32 @@
 #include<iostream>
 using namespace std;
-int rate[5] = { 0,3,1,4,1 };
-int map[5][5] = {
-        0,1,1,0,0,
-        1,0,0,1,1,
-        1,0,0,1,0,
-        0,1,1,0,1,
-        0,1,0,1,0,
-};
-int stindex = 0;
-int edindex = 4;
-
-int used[5];
-int MIN = 21e8;
-void dfs(int now, int sum){
-
-    if(sum > MIN)return;
-
-    if (now == edindex) {
-        if (sum < MIN) {
-            MIN = sum;
-            return;
-        }
-    }
-
-    for (int x = 0; x < 5; x++) {
-        if (map[now][x] == 1 && used[x] == 0) {
-            used[x] = 1;
-            dfs(x, sum + rate[x]); // += 사용하면 안됨!!
-            used[x] = 0;
-        }
-    }
-
-}
+// 연속된 m개의 숫자의 합이 최대일 때의 Max값은?
 int main()
 {
-    used[stindex] = 1;
-    dfs(stindex, rate[stindex]);
+    int arr[11] = { 4,2,1,2,2,1,3,4,0,2,3 };
 
-    cout << MIN;
+
+    int n = 11;
+    int m = 4;
+    int sum = 0;
+
+    for (int x = 0; x < 4; x++) {
+        sum += arr[x];
+    }
+
+    int MAX = sum;
+
+    for (int x = 0; x < n - m; x++) {
+        if(MAX < sum) MAX = sum;
+
+        sum += arr[x + m];
+        sum -= arr[x];
+    }
+
+    cout << MAX;
+
+    return 0;
+
 
     return 0;
 }
