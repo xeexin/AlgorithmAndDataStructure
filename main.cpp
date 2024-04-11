@@ -1,46 +1,49 @@
-/*
-   정수 n,m을 입력받은 후
-   n개의 대문자로 이루어진 한 문자열을 입력 받습니다.
-
-   입력>
-   12
-   4
-   ABBABQAADAAB
-
-   연속된 m개의 구간중 A가 가장 많은 구간은
-   A가 최대 몇개까지 등장 할까요?
-
-   정답은 3개
-
-*/
-
 #include<iostream>
+#include<vector>
+#include<algorithm>
+
 using namespace std;
+
+bool compare(int f, int b)
+{
+    return f > b;
+}
+
 int main()
 {
-    int n, m;
-    cin >> n >> m;
+    vector<int>vect = { 3,56,1,2,34,5 };
+    sort(vect.begin(), vect.end()); // 디폴트 less (오름차순)
+    sort(vect.begin(), vect.end(), greater<int>()); // 내림차순
 
-    string str;
-    cin >> str;
+    sort(vect.begin(), vect.end(),compare); // 내림차순 조건을 직접 부여
 
-    int bucket[200] = {0};
-    for (int x = 0; x < m; x++) {
-        bucket[str[x]]++;
+    for (int x = 0; x < vect.size(); x++) {
+        cout << vect[x]<<" ";
     }
 
-    int MAX = bucket['A'];
 
-    for (int x = 0; x < str.length() - m; x++) {
-        bucket[str[x]]--;
-        bucket[str[x + m]]++;
 
-        if (MAX < bucket['A']) {
-            MAX = bucket['A'];
-        }
+
+
+    /*
+    int len = vect.size();
+    for (int x = 0; x < len; x++) {
+        cout << vect[x] << " ";
     }
 
-    cout << MAX ;
+     end() 는 마지막 원소가 아니라 마지막 다음칸..
+    for (auto x = vect.begin(); x != vect.end(); ++x)
+    {
+        cout << *x;
+    }
+
+     auto
+     변수 선언시 반드시 값 초기화 해야 함
+     매개변수 사용 불가 (단 리턴값의 자료형으로 사용은 가능)
+     구조체 맴버변수로 사용 불가능
+     */
+
+
 
     return 0;
 }
