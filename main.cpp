@@ -1,52 +1,46 @@
 /*
-정수 n을 입력받은 후
-n개의 정수를 입력받습니다.
-정수 m을 입력받습니다.
-5<n,m<1000000 제한시간 2초
-연속된 m개의 구간의 합이 가장 큰 구간은 몇번 인덱스 부터 이며
-그 값은 얼마일까요??
+   정수 n,m을 입력받은 후
+   n개의 대문자로 이루어진 한 문자열을 입력 받습니다.
 
- 12 5 3 7 4 1 1 5 2 3 4 5 7 1
+   입력>
+   12
+   4
+   ABBABQAADAAB
 
- 입력시
- 6 번인덱스 합은 21
- */
+   연속된 m개의 구간중 A가 가장 많은 구간은
+   A가 최대 몇개까지 등장 할까요?
 
+   정답은 3개
+
+*/
 
 #include<iostream>
-#include<vector>
 using namespace std;
 int main()
 {
-    //슬라이딩 윈도우(?) 뭐시기,,,,,, //다 더하고 max 값 갱신 후 앞에거 하나 빼고 뒤에거 하나 더하고,,, 반복
-
     int n, m;
     cin >> n >> m;
 
-    vector<int> arr(n);
+    string str;
+    cin >> str;
 
-    for (int x = 0; x < n; x++) cin >> arr[x];
-
-    int sum = 0;
+    int bucket[200] = {0};
     for (int x = 0; x < m; x++) {
-        sum += arr[x];  //최초 m개 구간의 합
+        bucket[str[x]]++;
     }
 
-    int MAX = sum;
-    int MaxIdx = 0;
+    int MAX = bucket['A'];
 
-    for (int x = 0; x < n - m; x++) {
-        sum -= arr[x];
-        sum += arr[x + m];
+    for (int x = 0; x < str.length() - m; x++) {
+        bucket[str[x]]--;
+        bucket[str[x + m]]++;
 
-        if(sum >MAX) {
-            MAX = sum;
-            MaxIdx = x+1; //주의!
+        if (MAX < bucket['A']) {
+            MAX = bucket['A'];
         }
     }
 
-
-    cout << "연속된" << m << "개의 구가의 합이 가장 큰 구간은" << MaxIdx << "인덱스 부터 이며, 그 값은 " << MAX << "입니다";
+    cout << MAX ;
 
     return 0;
 }
