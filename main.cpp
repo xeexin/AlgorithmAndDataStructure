@@ -1,26 +1,33 @@
-//
-//4 7 5 5 1 9 7 하드코딩 후
-//4 또는 5또는 9가 등장 할때 마다 result 배열에 값 넣고 출력하기
-//출력 결과는 4 5 5 9 */
+/*8. 문제
+        숫자 하나 입력받고 입력받은 숫자만큼 숫자를 입력받기  ( n번 푸쉬백 또는  (n) 하기)
+그다음 입력받은 숫자들의 합출력
 
+3
+1 2 4
+
+출력결과: 7*/
 #include<iostream>
-#include <vector>
+#include<vector>
 
 using namespace std;
+
 int main(){
-    vector<int> v = {4, 7, 5, 5, 1, 9, 7};
-    vector<int> ret;
+    int n;
+    cin >> n;
 
+    vector<int> v(n);
+    int cnt = 0;
+
+    for (int x = 0; x < n; x++) {
+        int k;
+        cin >> k;
+        v.push_back(k);
+    }
     for (int x = 0; x < v.size(); x++) {
-        if (v[x] == 4 || v[x] == 5 || v[x] == 9) {
-            ret.push_back(v[x]);
-        }
+        cnt += v[x];
     }
-
-    for (int x = 0; x < ret.size(); x++) {
-        cout << ret[x] << " ";
-    }
-
+    cout << cnt;
 
     return 0;
 }
+
