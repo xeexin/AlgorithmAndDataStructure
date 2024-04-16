@@ -1,23 +1,30 @@
 #include<iostream>
-#include<algorithm>
+#include<algorithm> // sort
+#include<string> // string
+#include<vector> // vector
 using namespace std;
-
-bool compare(int f, int b) {
-    // 1. 짝수 우선
-    // 2. 오름 차순  다중조건 sort
-    if(f%2==0 && b%2==1) return 1; //앞이 짝수, 뒤에 홀수 -> 1
-    if(f%2==1 && b%2==0) return 0; //앞이 홀수, 뒤에 짝수 -> 0
-    return f < b; // 같은 값이면 오름차순
-};
 int main()
 {
-    int arr[5] = { 3,6,12,3,1 };
-
-    sort(arr, arr + 5); //오름차순 정렬
-    sort(arr, arr + 5, greater<int>()); //내림차순 정렬
+    char aaq[10] = "asdfzxcv";
 
 
-    sort(arr, arr + 5, compare);
+    string bbq = "asdfzxcv";
+    sort(bbq.begin(), bbq.end());
+
+    string arr[5] = { "INC","JFK","HND","ATL","PVG" };
+    sort(arr, arr + 5, greater<string>());
+
+    vector<string>ar = { "INC","JFK","HND","ATL","PVG" };
+    sort(ar.begin(), ar.end());
+
+    vector<vector<string>>aaa = { {"JFK","INC"},{"HND","ATL"} };
+    sort(aaa.begin(), aaa.end());
+
+    vector<vector<string>>aaaa = { {"JFK","INC"},{"HND","ATL"} };
+    for (int x = 0; x < 2; x++)
+    {
+        sort(aaaa[x].begin(), aaaa[x].end());
+    }
 
 
     return 0;
