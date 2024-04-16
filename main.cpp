@@ -1,38 +1,28 @@
 /*
-9. 문제
+10. 이차배열의 형태
+vector<vector<string>>v;
 
-3
-    abcd
-    btskbs
-    pd
+예를들어 vector<vector<string>>v={{1,2,3},{4,5}};
+[0] 123
+[1] 45
 
-숫자하나 입력받고 vector에 입력받은 숫자 개수 만큼 문자열 입력받기
-입력받은 후 가장 긴 문자열 출력!
-
+출력해 보세요~
 */
 
-#include <iostream>
+#include<iostream>
 #include<vector>
+#include<string>
 using namespace std;
-int main(){
-
-    int n;
-    cin >> n;
-    vector<string> str(n);
-    int MAX = 0;
-    int maxIdx = 0;
-
-    for (int x = 0; x < n; x++) {
-        cin >> str[x];
-    }
-    for (int x = 0; x < n; x++) {
-        if (str[x].length() > MAX) {
-            MAX = str[x].length();
-            maxIdx = x;
+vector<vector<int>> v = {{1, 2, 3},
+                         {4, 5}};
+int main()
+{
+    for (int y = 0; y < v.size(); y++) {
+        for (int x = 0; x < v[y].size(); x++) {
+            cout << v[y][x];
         }
+        cout << endl;
     }
-
-    cout << str[maxIdx];
 
 
     return 0;
