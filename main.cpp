@@ -1,26 +1,26 @@
 #include<iostream>
-#include<algorithm>
 using namespace std;
+int arr[200];
 
-// h~o 우선
-// 오름차순
-bool compare(char f, char b) {
-    int aa = 0;
-    int bb = 0;
+char findBoss(char a){
+    if(arr[a]==0) return a;
 
-    if(f>='h' && f <='o') aa = 1;
-    if(b>='h' && b<='o') bb = 1;
+    char ret = findBoss(arr[a]);
+    return ret;
+}
+void setunion(char a, char b){
+    char aa = findBoss(a);
+    char bb = findBoss(b);
+    if(aa==bb)return;
+    arr[bb] = aa;
+}
+int main() {
 
-    if(aa==1 && bb==0) return 1;
-    if(aa=0 && bb== 1) return 0;
-    return f < b;
-};
-int main()
-{
-    char arr[10] = "btsgood";
+    setunion('a', 'b');
+    setunion('d', 'e');
+    setunion('b', 'e');
+    setunion('a', 'e');
+    setunion('c', 'f');
 
-    sort(arr, arr + 7, compare);
-
-    cout << arr;
     return 0;
 }
