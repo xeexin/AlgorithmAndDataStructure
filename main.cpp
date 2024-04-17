@@ -1,31 +1,32 @@
 #include<iostream>
-#include<algorithm> // sort
-#include<string> // string
-#include<vector> // vector
 using namespace std;
+struct node {
+    char ch;
+    int num;
+};
+node arr[6] = {
+        {'B',7},
+        {'B',6},
+        {'A',7},
+        {'A',2},
+        {'C',5},
+        {'C',3},
+};
+node ret[6];
+
+// 문자 내림 // 숫자 오름
+bool compare(node f, node b){
+    if(f.ch > b.ch) return 1;
+    if(f.ch<b.ch)return 0;
+    return f.num < b.num;
+}
 int main()
 {
-    char aaq[10] = "asdfzxcv";
-
-
-    string bbq = "asdfzxcv";
-    sort(bbq.begin(), bbq.end());
-
-    string arr[5] = { "INC","JFK","HND","ATL","PVG" };
-    sort(arr, arr + 5, greater<string>());
-
-    vector<string>ar = { "INC","JFK","HND","ATL","PVG" };
-    sort(ar.begin(), ar.end());
-
-    vector<vector<string>>aaa = { {"JFK","INC"},{"HND","ATL"} };
-    sort(aaa.begin(), aaa.end());
-
-    vector<vector<string>>aaaa = { {"JFK","INC"},{"HND","ATL"} };
-    for (int x = 0; x < 2; x++)
-    {
-        sort(aaaa[x].begin(), aaaa[x].end());
+    for (int x = 0; x < 6; x++) {
+        ret[x] = arr[x];
+        for (int y = x; y > 0; y--) {
+            if(compare(ret[y-1],ret[y])==0) swap(ret[y - 1], ret[y]);
+        }
     }
 
-
-    return 0;
-}
+;}
