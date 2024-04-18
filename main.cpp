@@ -1,53 +1,60 @@
-//pair 자료형
-// 두개의 자료형을 하나로 묶는 것
-// 장점 : sort 할 때 first 기준으로 정렬해줌
-//구조체로 써도 가능
+/*
+문제풀기 333 !!!~
+양방향 그래프의
+노드 갯수와 관계를 입력받으세요.
+그 다음 그래프에는 cycle이 존재 할까요 ?
+
+4
+A B
+B E
+C B
+A E
+
+발견
+
+3
+A B
+C D
+A D
+
+미발견 출력*/
 
 #include<iostream>
-#include<utility> //헤더파일 불러와야 함 but algorithm이나 vector 있으면 안써도 됨
-#include<algorithm>
 #include<vector>
 using namespace std;
-struct node {
-    int a;
-    int b;
-};
+int arr[200];
+char findBoss(char member){
+    if(arr[member]==0) return member;
+
+    char ret = findBoss(arr[member]);
+    return ret;
+}
+void setUnion(char a, char b){
+    if(findBoss(a)== findBoss(b)) return;
+    arr[findBoss(b)] = findBoss(a);
+}
 int main()
 {
-    node t = { 3,6 }; //구조체
+    int n;
+    cin >> n;
 
-    //1.
-    pair<int, int> t1 = { 3,6 }; //pair 자료형 [앞에 거 : first & 뒤에 거: second]
+    pair<char, char> p1;
+    vector<pair<char,char>> vector;
 
-    //출력
-    cout << t1.first << t1.second;
-    //입력
-    cin >> t1.first >> t1.second;
-    cout << t1.first << t1.second;
+    for (int x = 0; x < n; x++) {
+        cin >> p1.first >> p1.second;
+        vector.push_back(p1);
+    }
 
-
-    //2.
-    pair<int, char>t2;
-    cin >> t2.first >> t2.second;
-
-    //3.
-    pair<int, int>t3;
-    t3={ 3,7 };
-    t3 = make_pair(3, 8);
-
-    //4. 페어 안의 페어도 가능
-    pair < int, pair<int, int>>r;
-    r = { 3,{7,9} };
-    cout << r.second.first; //7
-
-
-    //5.
-    vector<pair<int, char>>vect;
-    vect.push_back({ 3,'T' });
-    vect.push_back(make_pair(7, 'E'));
-    vect.push_back({ 1,'T' });
-
-    sort(vect.begin(), vect.end()); //first 기준으로 sort 1-3-7
-
+    for(int x=0; x<n; x++){
+        if(findBoss(vector[x].first) != findBoss(vector[x].second)) { //보스가 같지 않다면
+            //묶어 주기
+            setUnion(vector[x].first, vector[x].second);
+        } else {
+            cout << "cycle 존재";
+            return 0;
+        }
+    }
+    cout << "cycle 미존재";
     return 0;
 }
