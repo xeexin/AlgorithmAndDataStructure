@@ -1,54 +1,47 @@
-/*
-
-그룹이 몇개 존재 할까요?
-vector<string>vect = {
-        "AE",
-        "FE",
-        "CE",
-        "CA",
-        "BD",
-        "DB",
-};
-
-그룹화 시킨다면!! 그룹화 후,
-        만들어진 그룹의 갯수는 무엇일까요?
-*/
-
 #include<iostream>
-#include<vector>
-#include<string>
 using namespace std;
-// 다음과 같이 그룹화를 진행 했을 경우 총 몇개의 그룹이 형성될까요?
-vector<string>arr = {
-        "AE",
-        "FE",
-        "CE",
-        "CA",
-        "BD",
-        "DB",
-};
-int vect[300];
-char find_boss(char member){
-    if(vect[member]==0) return member;
-    char result = find_boss(vect[member]);
-    vect[member] = result;
-    return member;
-}
-
-void setUnion(char a, char b){
-    vect[find_boss(b)] = find_boss(a);
-}
-int main()
+int arr[7] = { 5,2,1,8,3,9,7 };
+int vect[100];
+void bst(int value)
 {
-    int ret = 6;
+    int now = 1;
+    while (1) {
+        if (vect[now] == 0) {
+            vect[now] = value;
+        }
+        if (vect[now] > value) {
+            now *= 2;
+        } else {
+            now *= 2;
+            now++;
+        }
+    }
+}
+bool search(int value)
+{
+    int now = 1;
 
-    for (int x = 0; x < arr.size(); x++) {
-        if(find_boss(arr[x][0]) != find_boss(arr[x][1])) {
-            setUnion(arr[x][0], arr[x][1]);
-            ret--;
+    while (1) {
+        if(now>100)return 0; //범위 밖
+        if(vect[now]==value)return 1;
+        if (vect[now] > value) {
+            now *= 2;
+        } else {
+            now *= 2;
+            now++;
         }
     }
 
-    cout << ret;
+}
+int main()
+{
+
+    for (int x = 0; x < 7; x++)
+    {
+        bst(arr[x]);
+    }
+    if (search(4) == 1)cout << "존재";
+    else cout << "없는 숫자";
+
     return 0;
 }
