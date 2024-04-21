@@ -1,47 +1,59 @@
 #include<iostream>
+#include<vector>
+#include<queue>
+#include<stack>
 using namespace std;
-int arr[7] = { 5,2,1,8,3,9,7 };
-int vect[100];
-void bst(int value)
-{
-    int now = 1;
-    while (1) {
-        if (vect[now] == 0) {
-            vect[now] = value;
-        }
-        if (vect[now] > value) {
-            now *= 2;
-        } else {
-            now *= 2;
-            now++;
-        }
-    }
-}
-bool search(int value)
-{
-    int now = 1;
+int arr[8] = { 4,7,1,8,5,3,4,2 };
 
-    while (1) {
-        if(now>100)return 0; //범위 밖
-        if(vect[now]==value)return 1;
-        if (vect[now] > value) {
-            now *= 2;
-        } else {
-            now *= 2;
-            now++;
-        }
-    }
-
-}
 int main()
 {
-
-    for (int x = 0; x < 7; x++)
+    // queue FIFO
+    queue<int>q;
+    for (int x = 0; x < 8; x++)
     {
-        bst(arr[x]);
+        q.push(arr[x]);
     }
-    if (search(4) == 1)cout << "존재";
-    else cout << "없는 숫자";
+    for (int x = 0; x < 8; x++)
+    {
+        cout<<q.front();   //    47185342
+        q.pop();
+    }
+    cout << endl;
+    stack<int>st;
+    for (int x = 0; x < 8; x++)
+    {
+        st.push(arr[x]);
+    }
+    for (int x = 0; x < 8; x++)
+    {
+        cout << st.top();   //    24835741
+        st.pop();
+    }
+    cout << endl;
+    vector<int>vect;
+    for (int x = 0; x < 8; x++)
+    {
+        vect.push_back(arr[x]);
+    }
+    for (int x = 0; x < 8; x++)
+    {
+        cout << vect.back();    //    24785341
+        vect.pop_back();
+    }
+    cout << endl;
+    priority_queue<int, vector<int>>pq; // maxheap
 
+    for (int x = 0; x < 8; x++)
+    {
+        pq.push(arr[x]);
+    }
+    for (int x = 0; x < 8; x++)
+    {
+        cout << pq.top();   //    87431257
+        pq.pop();
+    }
+
+
+    
     return 0;
 }
