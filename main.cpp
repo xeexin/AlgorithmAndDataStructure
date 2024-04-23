@@ -1,36 +1,47 @@
 #include<iostream>
-#include<queue> // queue  priority queue
+#include<queue>
 using namespace std;
 
-int arr[5] = { 3,65,23,2,1 };
-struct cmp{
-    bool operator()(int b, int f){
-        // 짝수 우선
-        // 내림 차순
-        if(f%2==0 && b%2==1) return 1;
-        if(f%2==1 && b%2==0) return 0;
-        return f > b;
-    }
+struct node {
+    string name;
+    int length;
 };
 
+priority_queue<node>q;
+
+bool operator<(node b, node a)
+{
+    // 길이 오름차순 정렬
+    return a.length < b.length;
+}
 int main()
 {
+    q.push({ "kevin",10 });
+    q.push({ "jane",2 });
+    q.push({ "john",5 });
+    q.push({ "amy",2 });
+    q.push({ "bob",3 });
+    q.push({ "kate",5 });
 
-    priority_queue<int, vector<int>, cmp> pq;
 
+    while (q.size()!=1) {
+        node a = q.top(); // 첫번째로 가장 작은 값
+        q.pop();
 
-    for (int x = 0; x < 5; x++)
-    {
-        pq.push(arr[x]);
+        node b = q.top(); // 두번째로 가장 작은 값
+        q.pop();
+
+        // 두 항목의 이름 중 작은 것을 선택하여 새로운 항목의 이름으로 설정
+        string new_name = a.name;
+        if (new_name > b.name) new_name = b.name;
+
+        // 새로운 항목 생성 및 우선순위 큐에 삽입
+        node neweber = { new_name,a.length + b.length };
+        q.push(neweber);
     }
-
-    for (int x = 0; x < 5; x++)
-    {
-        cout << pq.top()<<" ";
-        pq.pop();
-    }
+    cout << q.top().name << " " << q.top().length;
 
 
-
-
+    return 0;
 }
+
