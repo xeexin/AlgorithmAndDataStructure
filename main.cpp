@@ -1,30 +1,36 @@
-//[Parametric Search Algorithm]
-
 #include<iostream>
-#include<string>
-#include<algorithm>
+#include<queue> // queue  priority queue
 using namespace std;
-string arr = "******____"; //60%
-//string arr = "__________";
-//string arr = "**********";
+
+int arr[5] = { 3,65,23,2,1 };
+struct cmp{
+    bool operator()(int b, int f){
+        // 짝수 우선
+        // 내림 차순
+        if(f%2==0 && b%2==1) return 1;
+        if(f%2==1 && b%2==0) return 0;
+        return f > b;
+    }
+};
+
 int main()
 {
-    int MAX = -1;
 
-    int st = 0;
-    int ed = arr.size() - 1;
+    priority_queue<int, vector<int>, cmp> pq;
 
-    while (st <= ed) {
-        int mid = (st + ed) / 2;
 
-        if (arr[mid] == '*') {
-            MAX = mid;
-            st = mid + 1;
-        } else {
-            ed = mid - 1;
-        }
+    for (int x = 0; x < 5; x++)
+    {
+        pq.push(arr[x]);
     }
 
-    cout << (MAX + 1) * 10 << "%";
-    return 0;
+    for (int x = 0; x < 5; x++)
+    {
+        cout << pq.top()<<" ";
+        pq.pop();
+    }
+
+
+
+
 }
