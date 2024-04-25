@@ -1,25 +1,26 @@
 #include<iostream>
 using namespace std;
-int path[10];
-// 3개의 주사위 던졌을 경우 << 중복 조합 >> 조합인데.. 나왔던 숫자 또 사용 가능
-void dfs(int lev, int st){
+char name[6] = "ABCDE";
+char path[10];
+void abc(int lev)
+{
+
     if (lev == 3) {
-        for (int x = 0; x < lev; x++) {
-            cout << path[x] << " ";
-        }
-        cout << endl;
+        cout << path << endl;
         return;
     }
 
-    for (int x = st; x <= 6; x++) {
-        path[lev] = x;
-        dfs(lev + 1, x);
+    for (int x = 0; x < 6; x++) {
+        if(lev!=0 && path[lev-1]>=(char) x+'A')continue;
+        path[lev] = x + 'A';
+        abc(lev + 1);
         path[lev] = 0;
     }
 }
 int main()
 {
-    dfs(0, 1);
+    abc(0); // level
+
 
     return 0;
 }
