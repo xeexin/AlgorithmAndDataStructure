@@ -2,24 +2,25 @@
 using namespace std;
 char name[6] = "ABCDE";
 char path[10];
-void abc(int lev)
+void abc(int level,int start) // 0
 {
-
-    if (lev == 3) {
+    if (level == 3)
+    {
         cout << path << endl;
         return;
     }
+    for (int x = start; x < 5; x++)
+    {
+        path[level] = name[x];
+        abc(level + 1, x + 1);
+        path[level] = 0;
 
-    for (int x = 0; x < 6; x++) {
-        if(lev!=0 && path[lev-1]>=(char) x+'A')continue;
-        path[lev] = x + 'A';
-        abc(lev + 1);
-        path[lev] = 0;
+
     }
 }
 int main()
 {
-    abc(0); // level
+    abc(0,0); // level start
 
 
     return 0;
