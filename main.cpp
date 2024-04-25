@@ -1,33 +1,26 @@
 #include<iostream>
 using namespace std;
-int vect[20] = { 1,3,-1,6,-3,-1,5,100,3,2,5,1 };
-int arr[3] = { 2,3,5 };
-int Max = -21e8;
-void abc(int level, int now, int sum)
+int path[10];
+// 3개의 주사위 던졌을 경우 중복순열-> 다출력 하기
+void abc(int level)
 {
-    if (now > 11)
-    {
-        // sum의 맥스값 갱신
-        if (sum > Max)
-        {
-            Max = sum;
+    if (level == 3) {
+        for (int x = 0; x < 3; x++) {
+            cout << path[x];
         }
+        cout << endl;
         return;
     }
-    for (int x = 0; x < 3; x++)
-    {
-        abc(level + 1, now + arr[x], sum + vect[now + arr[x]]);
-    }
 
+    for (int x = 1; x <= 6; x++) {
+        path[level] = x;
+        abc(level + 1);
+        path[level]=0;
+    }
 }
 int main()
 {
-
-    abc(0, 0, vect[0]);
-    cout << Max;
+    abc(0);
 
     return 0;
 }
-
-
-
