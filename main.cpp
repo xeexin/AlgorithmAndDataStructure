@@ -1,37 +1,13 @@
 #include<iostream>
-#include<string>
-#include<vector>
+#include<cstring>
 using namespace std;
-string target = "mincoding";
-vector<string>vect={"mi","ncod","ing","cod","minco","min"};
-int used[6];
-int flag = 0;
-string words;
-void dfs(int level )
-{
-    if(words.length() > target.length() )return; // 시간 최소화
 
-    if (words == target) {
-        flag=1;
-        return;
-    }
-
-    if(level==vect.size())return;
-
-    string backup = words; //백업해주기!!
-
-    for (int x = 0; x < vect.size(); x++) {
-        if(used[x]==1) continue;
-        used[x] = 1;
-        words += vect[x];
-        dfs(level + 1);
-        used[x] = 0;
-        words = backup;
-    }
-}
 int main()
 {
-    dfs(0);
+    char arr[5] = "asdf";
+    char vect[5];
+    //strcpy(vect, arr);  문자열
+    memcpy(vect, arr, sizeof(arr)); //메모리 블록을 복사합니다. 문자열이나 다른 데이터 형식을 모두 복사할 수 있습니다.
 
     return 0;
 }
