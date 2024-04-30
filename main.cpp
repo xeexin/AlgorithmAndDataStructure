@@ -1,30 +1,37 @@
-// 거스름돈을 최소로 받을 수 있는 갯수는?
-
 #include<iostream>
+#include<string>
+#include<vector>
 using namespace std;
-int coin[3] = { 110,70,10 };
-int n;
-int MIN = 21e8;
-int answer;
+string target = "mincoding";
+vector<string>vect={"mi","ncod","ing","cod","minco","min"};
+int used[6];
+int flag = 0;
+string words;
+void dfs(int level )
+{
+    if(words.length() > target.length() )return; // 시간 최소화
 
-void dfs(int lev, int sum){
-    if(sum==0){
-        if (lev < MIN) {
-            MIN = lev;
-        }
+    if (words == target) {
+        flag=1;
         return;
     }
 
-    for (int x = 0; x < 3; x++) {
-        dfs(lev + 1, sum - coin[x]);
-    }
+    if(level==vect.size())return;
 
+    string backup = words; //백업해주기!!
+
+    for (int x = 0; x < vect.size(); x++) {
+        if(used[x]==1) continue;
+        used[x] = 1;
+        words += vect[x];
+        dfs(level + 1);
+        used[x] = 0;
+        words = backup;
+    }
 }
 int main()
 {
-    cin >> n;
-    dfs(0, n);
-    cout << MIN;
+    dfs(0);
 
     return 0;
 }
