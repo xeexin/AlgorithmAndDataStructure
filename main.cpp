@@ -1,29 +1,25 @@
+/*
+1. sum 전역 (들어가며 누적합 출력)
+*/
+
 #include<iostream>
 using namespace std;
-int map[20] = { 1,3,-1,6,-3,-1,5,100,3,2,5,1 };
-int jump[3] = { 2,3,5 };
-int MAX = -21e8;
-int maxidx;
-int sum;
-void dfs(int lev, int idx){
-     
-    if (sum > MAX) {
-        MAX = sum;
-        maxidx = lev;
-    }
+int arr[5] = { 4,7,3,6,5 };
+int sum = 0;
 
-    if(idx>11)return;
+void abc(int level)
+{
+    if(level==5) return;
 
-    for (int x = 0; x < 3; x++) {
-        sum += map[idx + jump[x]];
-        dfs(lev + 1, idx + jump[x]);
-        sum -= map[idx + jump[x]];
-    }
+    sum += arr[level];
+    cout << sum << endl;
+    abc(level + 1);
 }
 int main()
 {
-    dfs(0, 0);
 
-    cout << maxidx << "번 점프해서 " << MAX;
+    abc(0);
+
+
     return 0;
 }
