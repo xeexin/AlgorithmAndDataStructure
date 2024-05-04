@@ -1,25 +1,26 @@
 /*
-1. sum 전역 (들어가며 누적합 출력)
+2. sum 매개변수 (들어가며 누적합 출력)
 */
 
 #include<iostream>
 using namespace std;
 int arr[5] = { 4,7,3,6,5 };
-int sum = 0;
 
-void abc(int level)
+void abc(int level,int sum)  // 0 4
 {
-    if(level==5) return;
+    if(level==5)return;
 
-    sum += arr[level];
     cout << sum << endl;
-    abc(level + 1);
+    
+    abc(level + 1, sum + arr[level + 1]);
+
 }
 int main()
 {
 
-    abc(0);
+    abc(0, arr[0]);
 
 
     return 0;
 }
+
