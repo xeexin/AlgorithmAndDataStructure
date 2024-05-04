@@ -1,45 +1,29 @@
 #include<iostream>
-#include<cstdlib>
 using namespace std;
-
-int power[7] = { 90,20,36,48,80,60,70 };
-int MIN = 21e8;
-char path[10];
-char check[10];
-int visited[10];
-
-void dfs(int lev, int sum){
-    int against = 0; // 속하지 않은 팀의 합
-    for (int x = 0; x < 7; x++) {
-        if (visited[x] == 0) {
-            against += power[x];
-        }
+int map[20] = { 1,3,-1,6,-3,-1,5,100,3,2,5,1 };
+int jump[3] = { 2,3,5 };
+int MAX = -21e8;
+int maxidx;
+int sum;
+void dfs(int lev, int idx){
+     
+    if (sum > MAX) {
+        MAX = sum;
+        maxidx = lev;
     }
 
-    int gap = abs(sum - against);
-    if (gap < MIN) {
-        MIN = gap;
-        memcpy(check, path, sizeof(path));  // check에 복사...
-    }
+    if(idx>11)return;
 
-    if(lev==5) return; //team이니까 최소 두명이상이 팀이라고 가정하고 리턴 조건
-
-    for (int x = 0; x < 7; x++) {
-        if(lev>0 && path[lev-1] >= char ('a'+x)) continue; // 중복 조합 방지
-
-        path[lev] = 'a' + x;
-        visited[x] = 1;
-        dfs(lev + 1, sum + power[x]);
-        visited[x] = 0;
-        path[lev] = 0;
-
+    for (int x = 0; x < 3; x++) {
+        sum += map[idx + jump[x]];
+        dfs(lev + 1, idx + jump[x]);
+        sum -= map[idx + jump[x]];
     }
 }
-int main(){
-
+int main()
+{
     dfs(0, 0);
-    cout << MIN << endl;
-    cout << check ;
 
+    cout << maxidx << "번 점프해서 " << MAX;
     return 0;
 }
