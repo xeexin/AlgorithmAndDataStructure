@@ -1,48 +1,42 @@
-//미로찾기
-//시작(0,0)-도착(5,7)까지 갈수 있나
-//방향 : 상하좌우
-#include<iostream>
-using namespace std;
-int map[6][7]={
-        0,0,0,0,0,0,0,
-        0,0,1,0,1,1,0,
-        0,0,1,0,0,0,0,
-        1,0,0,1,0,1,1,
-        0,1,0,1,0,0,0,
-        0,1,0,0,1,0,2
-}; //2는 도착  1은 장애물
-int visited[6][7];
-int direct[4][2] = {-1, 0,
-                     1, 0,
-                     0, -1,
-                     0, 1};
-int flag;
+//n 입력후 , n개의 정수 입력 받기
+// ex) 4 9 3 2 7
+//각 숫자에 3을 곱하거나 2로 나누거나 5를 빼서 숫자를 만든다
+//만들어진 4개의 숫자의 곱이 max일 때의 값 구하기
 
-void dfs(int yy, int xx){
-    if (map[yy][xx] == 2) {
-        flag = 1;
+#include<iostream>
+#include<vector>
+using namespace std;
+int n;
+vector<int> vect;
+int MAX = -21e8;
+int calcul[3] = {3, 2, -5};
+
+void dfs(int lev, int sum){
+    if (lev == n) {
+        if (MAX < sum) {
+            MAX = sum;
+        }
         return;
     }
 
-    if(flag==1)return;
-
-    for (int t = 0; t < 4; t++) {
-        int dy = yy + direct[t][0];
-        int dx = xx + direct[t][1];
-
-        if(dy <0 || dx<0|| dy>5 || dx >6)continue;
-        if(map[dy][dx]==1)continue;
-        if(visited[dy][dx]==1)continue;
-        
-        visited[yy][xx] = 1;
-        dfs(dy, dx);
+    for (int t = 0; t < 3; t++) {
+        if(t==0) dfs(lev + 1, sum * vect[lev] * calcul[0]);
+        if(t==1) dfs(lev + 1, sum * vect[lev] / calcul[1]);
+        if(t==2) dfs(lev + 1, sum * vect[lev] + calcul[2]);
     }
-}
-int main()
-{
-    dfs(0, 0);  //출발점 (0,0)
 
-    if(flag==1)cout << "갈 수 있음";
-    else cout << "갈 수 없음";
+}
+int main(){
+
+    cin >> n;
+    for (int x = 0; x < n; x++) {
+        int t;
+        cin >> t;
+        vect.push_back(t);
+    }
+
+    dfs(0, 1);
+
+    cout << MAX;
     return 0;
 }
