@@ -1,47 +1,48 @@
-//map에서 갈수 있는 MAXPOINT 구하기 문제
-
+//미로찾기
+//시작(0,0)-도착(5,7)까지 갈수 있나
+//방향 : 상하좌우
 #include<iostream>
 using namespace std;
+int map[6][7]={
+        0,0,0,0,0,0,0,
+        0,0,1,0,1,1,0,
+        0,0,1,0,0,0,0,
+        1,0,0,1,0,1,1,
+        0,1,0,1,0,0,0,
+        0,1,0,0,1,0,2
+}; //2는 도착  1은 장애물
+int visited[6][7];
+int direct[4][2] = {-1, 0,
+                     1, 0,
+                     0, -1,
+                     0, 1};
+int flag;
 
-int map[5][4] = {
-        4,7,1,8,
-        9,0,5,4,
-        0,1,9,9,
-        1,1,9,0,
-        1,1,9,9 }; //0은 벽
-
-int direct[3] = {-1, 0, 1}; // 좌 , 자신, 우
-
-int MAX = -21e8;
-
-void dfs(int lev, int now, int sum){
-
-    if(lev==5){
-        if (sum > MAX) {
-            MAX = sum;
-        }
+void dfs(int yy, int xx){
+    if (map[yy][xx] == 2) {
+        flag = 1;
         return;
     }
 
-    for (int x = 0; x < 3; x++) {
-        int dy = lev;
-        int dx = now + direct[x];
+    if(flag==1)return;
 
-        if(dy<0 || dx <0||dy>4 || dx>3)continue;
-        if(map[dy][dx]==0)continue;
+    for (int t = 0; t < 4; t++) {
+        int dy = yy + direct[t][0];
+        int dx = xx + direct[t][1];
 
-        dfs(lev + 1, now + direct[x], sum + map[dy][dx]);
+        if(dy <0 || dx<0|| dy>5 || dx >6)continue;
+        if(map[dy][dx]==1)continue;
+        if(visited[dy][dx]==1)continue;
+        
+        visited[yy][xx] = 1;
+        dfs(dy, dx);
     }
-
 }
-
 int main()
 {
-    for (int x = 0; x < 4; x++) {
-        dfs(0, x, 0);
-    }
+    dfs(0, 0);  //출발점 (0,0)
 
-    cout << MAX;
-
+    if(flag==1)cout << "갈 수 있음";
+    else cout << "갈 수 없음";
     return 0;
 }
