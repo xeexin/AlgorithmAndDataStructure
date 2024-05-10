@@ -1,34 +1,33 @@
+//	3
+//	100 10 30 입력
+
 #include<iostream>
-#include <queue>
+#include<algorithm>
+#include<vector>
 using namespace std;
-int arr[6] = { 5,4,2,7,6,3 };
-struct node {
-    int a;
-};
-bool operator<(node b, node a){
-    if (a.a % 2 == 0 && b.a % 2 == 1)return true;
-    if (a.a % 2 == 1 && b.a % 2 == 0) return false;
-    return a.a > b.a;
-}
-// 짝수 우선, 내림차순
-int main(){
-
-    node b[6];
-
-    for (int x = 0; x < 6; x++) {
-        b[x].a = arr[x];
+int main()
+{
+    int n;
+    cin >> n;
+    vector<int> vect(n);
+    for (int x = 0; x < n; x++) {
+        /*int k;
+        cin >> k;
+        vect.push_back(k);*/
+        cin >> vect[x];
     }
 
-    priority_queue<node>q;
+    sort(vect.begin(), vect.end());
 
-    for (int x = 0; x < 6; x++) {
-        q.push(b[x]);
+    int time=0;
+    int remain = n - 1;
+    int idx = 0;
+
+    while (true) {
+        time += (vect[idx++] * remain);
+        remain--;
+        if(idx==n)break;
     }
-
-    for (int x = 0; x < 6; x++) {
-        cout << q.top().a << " ";
-        q.pop();
-    }
-
+    cout << time;
     return 0;
 }
