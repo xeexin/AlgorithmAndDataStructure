@@ -1,30 +1,33 @@
+// 백준 10799번
+/*
+ * ( -> 스택에 쌓기
+ * () -> ( 개수만큼 늘어남
+ * ) -> 팝 후 개수 하나 늘리기
+ * */
+
 #include <iostream>
-#include <string>
+#include<stack>
 using namespace std;
-char arr[4] = "012";
-char path[10];
-int n, cnt;
+int main(){
 
-void dfs(int lev){
-    if(path[0]=='0') return;
+    string str;
+    cin >> str;
 
-    if (lev == n) {
-        int num = stoi(path);
-        if (num % 3 == 0) {
+    int cnt = 0;
+    stack<int> s;
+
+    for (int x = 0; x < str.size(); x++) {
+        if (str[x] == '(' && str[x + 1] == ')') {
+            cnt += s.size();
+            x++;
+        }
+        else if(str[x]=='(') s.push(str[x]);
+        else if (str[x]==')') {
+            s.pop();
             cnt++;
         }
-        return;
     }
-
-    for (int x = 0; x < 3; x++) {
-        path[lev] = arr[x];
-        dfs(lev + 1);
-    }
-}
-int main() {
-    cin >> n;
-
-    dfs(0);
     cout << cnt;
 
+    return 0;
 }
