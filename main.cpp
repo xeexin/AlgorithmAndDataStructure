@@ -1,33 +1,43 @@
-// 백준 10799번
+// 백준 10828번
 /*
- * ( -> 스택에 쌓기
- * () -> ( 개수만큼 늘어남
- * ) -> 팝 후 개수 하나 늘리기
+
  * */
 
 #include <iostream>
 #include<stack>
 using namespace std;
 int main(){
+    int n;
+    cin >> n;
 
-    string str;
-    cin >> str;
-
-    int cnt = 0;
     stack<int> s;
 
-    for (int x = 0; x < str.size(); x++) {
-        if (str[x] == '(' && str[x + 1] == ')') {
-            cnt += s.size();
-            x++;
+    for (int x = 0; x < n; x++) {
+        string str;
+        cin >> str;
+
+        if (str == "push") {
+            int num;
+            cin >> num;
+            s.push(num);
         }
-        else if(str[x]=='(') s.push(str[x]);
-        else if (str[x]==')') {
-            s.pop();
-            cnt++;
+        if(str=="pop") {
+            if (s.empty()) {
+                cout << "-1" <<endl;
+            } else {
+                cout << s.top() << endl;
+                s.pop();
+            }
+        }
+        if(str=="size") cout << s.size() << endl;
+        if(str== "empty") {
+            if(s.empty()) cout << "1" << endl;
+            else cout << "0" << endl;
+        }
+        if(str=="top") {
+            if(s.empty()) cout << "-1" << endl;
+            else cout << s.top() << endl;
         }
     }
-    cout << cnt;
-
     return 0;
 }
