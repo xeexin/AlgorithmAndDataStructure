@@ -7,37 +7,31 @@
 #include<stack>
 using namespace std;
 int main(){
-    int n;
-    cin >> n;
+    stack<int> s[7]; //줄 6개
 
-    stack<int> s;
+    int n,p;
+    cin >> n >> p;
+
+    int a,b;
+    int cnt = 0;
 
     for (int x = 0; x < n; x++) {
-        string str;
-        cin >> str;
+        cin >> a >> b;
 
-        if (str == "push") {
-            int num;
-            cin >> num;
-            s.push(num);
-        }
-        if(str=="pop") {
-            if (s.empty()) {
-                cout << "-1" <<endl;
-            } else {
-                cout << s.top() << endl;
-                s.pop();
+        if(!s[a].empty() && s[a].top() > b) { //비어있지 않고 && 누르고 있는 프렛 번호 > 누를 프렛 번호
+            while (!s[a].empty() && s[a].top() > b) {
+                s[a].pop();
+                cnt++;
             }
         }
-        if(str=="size") cout << s.size() << endl;
-        if(str== "empty") {
-            if(s.empty()) cout << "1" << endl;
-            else cout << "0" << endl;
-        }
-        if(str=="top") {
-            if(s.empty()) cout << "-1" << endl;
-            else cout << s.top() << endl;
+
+        if (s[a].empty() || s[a].top() < b) { // 누르고 있는 프렛 번호 < 누를 프렛 번호
+            cnt++;
+            s[a].push(b);
         }
     }
+
+    cout << cnt;
+
     return 0;
 }
