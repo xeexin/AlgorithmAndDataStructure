@@ -1,37 +1,58 @@
-// 백준 10828번
-/*
-
- * */
-
-#include <iostream>
-#include<stack>
+//백준 1260번
+#include<iostream>
+#include<queue>
 using namespace std;
-int main(){
-    stack<int> s[7]; //줄 6개
+int map[1001][1001];
+int visited[1001];
+int n,m,v;
+void reset(){
+    for (int x = 1; x <= n; x++)  visited[x] = 0;
+}
+void dfs(int v){
+    visited[v]=1;
+    cout << v << " ";
 
-    int n,p;
-    cin >> n >> p;
-
-    int a,b;
-    int cnt = 0;
-
-    for (int x = 0; x < n; x++) {
-        cin >> a >> b;
-
-        if(!s[a].empty() && s[a].top() > b) { //비어있지 않고 && 누르고 있는 프렛 번호 > 누를 프렛 번호
-            while (!s[a].empty() && s[a].top() > b) {
-                s[a].pop();
-                cnt++;
-            }
-        }
-
-        if (s[a].empty() || s[a].top() < b) { // 누르고 있는 프렛 번호 < 누를 프렛 번호
-            cnt++;
-            s[a].push(b);
-        }
+    for (int x = 1; x <= n; x++) {
+        if(visited[x]==0 && map[v][x]==1) dfs(x);
+        if(x==n) return;
     }
 
-    cout << cnt;
+}
+void bfs(int v){
+    queue<int>q;
+    q.push(v);
+    visited[v] = 1;
+
+    while (!q.empty()) {
+        int now = q.front();
+        cout << now << " ";
+        q.pop();
+
+        for (int x = 1; x <= n; x++) {
+            if(map[now][x]==1 && visited[x]==0) {
+                q.push(x);
+                visited[x] = 1;
+            }
+        }
+    }
+}
+
+int main(){
+    cin >> n >> m >> v;
+
+    for (int x = 0; x < m; x++) {
+        int a,b;
+        cin >> a >> b;
+
+        map[a][b] = 1;
+        map[b][a] = 1;
+    }
+
+    dfs(v);
+    cout << "\n";
+    reset();
+    bfs(v);
+
 
     return 0;
 }
