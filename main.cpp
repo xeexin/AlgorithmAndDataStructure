@@ -1,44 +1,24 @@
-// 백준 1780
+// 백준 S_1_1629
 
-#include<iostream>
+#include <iostream>
 using namespace std;
-int cnt_1, cnt0, cnt1;
-int arr[2200][2200];
-bool issame(int yy, int xx, int n){
-    int target = arr[yy][xx];
-    for (int y = yy; y < yy + n; y++) {
-        for (int x = xx; x < xx + n; x++) {
-            if (target != arr[y][x]) {
-                return false;
-            }
-        }
-    }
-    return true;
-}
-void div(int yy, int xx, int n) {
-    if (issame(yy, xx, n)) {
-        if (arr[yy][xx] == -1) cnt_1++;
-        if (arr[yy][xx] == 0) cnt0++;
-        if (arr[yy][xx] == 1) cnt1++;
-    }else{
-        int volume = n / 3;
-        for (int y = 0; y < 3; y++) {
-            for (int x = 0; x < 3; x++) {
-                div(volume * y+yy, volume * x+xx, volume);
-            }
-        }
-    }
+long long a,b,c;
+long long rec(long long b){
+
+    if(b==0) return 1;
+    if(b==1) return a % c;
+
+    long long k;
+    k = rec(b / 2) % c; // b를 반으로 나눈 결과를 k에 저장
+    if(b%2==0) return k * k % c; //짝수
+    else return (k * k % c) * (a % c);   //홀수
+
 }
 int main(){
-    int n;
-    cin >> n;
-    for (int y = 0; y < n; y++) {
-        for (int x = 0; x < n; x++) {
-            cin >> arr[y][x];
-        }
-    }
 
-    div(0, 0, n);
-    cout << cnt_1 << endl << cnt0 << endl << cnt1;
+    cin >> a >> b >> c;
+
+    cout << rec(b) % c;
+
     return 0;
 }
