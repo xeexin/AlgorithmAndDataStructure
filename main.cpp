@@ -1,24 +1,43 @@
-// 백준 S_1_1629
+// 백준 S_1_1992
 
-#include <iostream>
+#include<iostream>
 using namespace std;
-long long a,b,c;
-long long rec(long long b){
+int map[80][80];
+int n;
+string str;
+void solve(int yy, int xx, int size){
 
-    if(b==0) return 1;
-    if(b==1) return a % c;
+  for(int y=yy; y<yy+size; y++){
+    for(int x=xx; x<xx+size; x++){
+      if(map[y][x] != map[yy][xx]){
+        cout << "(";
+        solve(yy, xx,size/2);
+        solve(yy, xx+size/2, size/2);
+        solve(yy+size/2, xx, size/2);
+        solve(yy+size/2, xx+size/2, size/2);
+        cout<<")";
+        return;
+      }
+    }
+  }
+  cout << map[yy][xx];
+}
+int main() {
+  cin>>n;
 
-    long long k;
-    k = rec(b / 2) % c; // b를 반으로 나눈 결과를 k에 저장
-    if(b%2==0) return k * k % c; //짝수
-    else return (k * k % c) * (a % c);   //홀수
+  for(int y=0; y<n; y++){
+    cin >>str;
+    for(int x=0; x<n; x++){
+      map[y][x]=str[x]-'0';
+    }
+  }
+
+
+  solve(0,0,n);
+
+
+
+  return 0;
 
 }
-int main(){
 
-    cin >> a >> b >> c;
-
-    cout << rec(b) % c;
-
-    return 0;
-}
