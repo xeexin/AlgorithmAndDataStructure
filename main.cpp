@@ -1,59 +1,54 @@
-// 백준 S_1_14888
+// 백준 G_5_1759
 
 #include <iostream>
+#include<algorithm>
+#include<vector>
 using namespace std;
-int arr[12]; //순서 바뀌면 안됨.
-int sam[4];
-int n;
-int MAX = -21e8;
-int MIN = 21e8;
+int l, c; //
+vector<char> v;
+vector<char> ret;
 
-void dfs(int lev, int sum) {
-    if (lev == n) {
-        if (sum > MAX) MAX = sum;
-        if (sum < MIN) MIN = sum;
+//최소 한 개의 모음(a, e, i, o, u)과 최소 두 개의 자음으로 구성됨
+bool check() {
+    int mo=0;
+    for (int x=0; x<l;x++) {
+        if (ret[x] == 'a' || ret[x] == 'e' || ret[x] == 'i' || ret[x] == 'o'|| ret[x] == 'u') {mo++;}
+    }
+
+    if (mo >=1 && l-mo >=2) return true;
+    else return false;
+
+}
+void dfs( int st) {
+
+    if (ret.size()==l) {
+        if (check()) {
+            for (int x=0; x<l; x++) {
+                cout<<ret[x];
+            }
+            cout<<endl;
+        }
         return;
     }
-    for (int x = 0; x < 4; x++) {
-        if (sam[x] > 0) {
-            sam[x]--;
-            if (x == 0) {
-                // 덧셈
-                dfs(lev + 1, sum + arr[lev]);
-            } else if (x == 1) {
-                // 뺄셈
-                dfs(lev + 1, sum - arr[lev]);
-            } else if (x == 2) {
-                // 곱셈
-                dfs(lev + 1, sum * arr[lev]);
-            } else if (x == 3) {
-                // 나눗셈
-                int temp;
-                if (sum < 0)
-                    temp = -(-sum / arr[lev]);
-                else
-                    temp = sum / arr[lev];
-                dfs(lev + 1, temp);
-            }
-            sam[x]++;
-        }
+
+    for (int x=st; x<c; x++) {
+        ret.push_back(v[x]);
+        dfs( x+1);
+        ret.pop_back();
     }
 }
-
 int main() {
-    cin >> n;
-    for (int x = 0; x < n; x++) {
-        cin >> arr[x];
+    cin >> l >> c;
+
+    for (int x=0; x<c; x++) {
+        char ch;
+        cin>>ch;
+        v.push_back(ch);
     }
 
-    for (int x = 0; x < 4; x++) {
-        cin >> sam[x];
-    }
+    //정렬
+    sort(v.begin(),v.end());
 
-    dfs(1, arr[0]);
-
-    cout << MAX << endl << MIN << endl;
-
-
+    dfs(0);
     return 0;
 }
