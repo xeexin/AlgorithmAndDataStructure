@@ -1,54 +1,79 @@
 // 백준 G_5_1759
 
 #include <iostream>
-#include<algorithm>
 #include<vector>
+#include<cstdlib>
 using namespace std;
-int l, c; //
-vector<char> v;
-vector<char> ret;
+int n, m;
+int minCityDistance = 21e8;
+struct home {
+    int yy,xx;
+};
+struct chicken {
+    int yy,xx;
+    bool visited;
+};
 
-//최소 한 개의 모음(a, e, i, o, u)과 최소 두 개의 자음으로 구성됨
-bool check() {
-    int mo=0;
-    for (int x=0; x<l;x++) {
-        if (ret[x] == 'a' || ret[x] == 'e' || ret[x] == 'i' || ret[x] == 'o'|| ret[x] == 'u') {mo++;}
-    }
+vector<home> home;
+vector<chicken> chicken;
 
-    if (mo >=1 && l-mo >=2) return true;
-    else return false;
+// 1. m개의 치킨집 뽑기(중복 조합 X)
+// 2. m개의 치킨집에서 가장 가까운 거리 구하기
+// 3. 조합이 최대가 되는 거 구하기
+void getDistance() {
+    int cityDistance = 0;
 
-}
-void dfs( int st) {
-
-    if (ret.size()==l) {
-        if (check()) {
-            for (int x=0; x<l; x++) {
-                cout<<ret[x];
+    for (int y=0; y<home.size(); y++) {
+        int minHomeDistance = 21e8;
+        for (int x=0; x<chicken.size(); x++) {
+            if (chicken[x].visited == true) {
+                int homeDistance = abs(home[y].yy - chicken[x].yy) + abs(home[y].xx - chicken[x].xx);
+                if (homeDistance < minHomeDistance) {
+                    minHomeDistance = homeDistance;
+                }
             }
-            cout<<endl;
         }
-        return;
+        cityDistance += minHomeDistance;
     }
 
-    for (int x=st; x<c; x++) {
-        ret.push_back(v[x]);
-        dfs( x+1);
-        ret.pop_back();
+    if (cityDistance < minCityDistance) {
+        minCityDistance = cityDistance;
     }
+}
+void selectChicken(int st, int lev) {
+
+    if (lev == m) {
+        getDistance();
+    }
+
+    for (int x= st; x<chicken.size(); x++) {
+        if (!chicken[x].visited) {
+            chicken[x].visited = true;
+            selectChicken(x, lev+1);
+            chicken[x].visited = false;
+        }
+    }
+
+
 }
 int main() {
-    cin >> l >> c;
 
-    for (int x=0; x<c; x++) {
-        char ch;
-        cin>>ch;
-        v.push_back(ch);
+    //1. 입력
+    cin >> n >> m; //도시n개 치킨집m개
+    int flag;
+    for (int y = 0; y < n; y++) {
+        for (int x = 0; x < n; x++) {
+            cin >> flag;
+            if (flag==1) home.push_back({y,x});
+            else if (flag==2) chicken.push_back({y,x,false});
+        }
     }
 
-    //정렬
-    sort(v.begin(),v.end());
+    //2. 연산
+    selectChicken(0,0);
 
-    dfs(0);
+
+    cout << minCityDistance << endl;
+
     return 0;
 }
