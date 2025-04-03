@@ -1,79 +1,42 @@
-// 백준 G_5_1759
+// 백준 G_4_9663
+// *** 꼭 다시 한번 풀어보기!!!
+
+// 룰 : 같은 행 || 같은 열 || 대각선에 퀸이 존재하면 안됨!!!
 
 #include <iostream>
-#include<vector>
 #include<cstdlib>
 using namespace std;
-int n, m;
-int minCityDistance = 21e8;
-struct home {
-    int yy,xx;
-};
-struct chicken {
-    int yy,xx;
-    bool visited;
-};
+int col[15]; // col[i] = i번째 행에 놓은 퀸의 열(column) 위치
+int n, tot; //체스판의 크기, 가능한 경우의 수
 
-vector<home> home;
-vector<chicken> chicken;
+bool check(int lev) {
+    for (int x=0; x<lev; x++) {
+        //대각선이거나 같은 라인인지 확인
+        if (col[x] == col[lev] || abs(col[lev]- col[x]) == lev-x ) return false;
 
-// 1. m개의 치킨집 뽑기(중복 조합 X)
-// 2. m개의 치킨집에서 가장 가까운 거리 구하기
-// 3. 조합이 최대가 되는 거 구하기
-void getDistance() {
-    int cityDistance = 0;
+        // col[i]가 의미하는 것이 x좌표, i가 의미하는 것 y좌표이므로 차이가 일정하다면 대각선에 있다는 것을 알 수 있다.
+    }
+    return true;
 
-    for (int y=0; y<home.size(); y++) {
-        int minHomeDistance = 21e8;
-        for (int x=0; x<chicken.size(); x++) {
-            if (chicken[x].visited == true) {
-                int homeDistance = abs(home[y].yy - chicken[x].yy) + abs(home[y].xx - chicken[x].xx);
-                if (homeDistance < minHomeDistance) {
-                    minHomeDistance = homeDistance;
-                }
+}
+
+void nqueen(int x) {
+    if (x == n) {
+        tot ++;
+    }
+    else {
+        for (int i=0; i<n; i++) {
+            col[x] = i; //해당 위치에 퀸을 배치
+            if (check(x)) {
+                nqueen(x+1);
             }
         }
-        cityDistance += minHomeDistance;
     }
-
-    if (cityDistance < minCityDistance) {
-        minCityDistance = cityDistance;
-    }
-}
-void selectChicken(int st, int lev) {
-
-    if (lev == m) {
-        getDistance();
-    }
-
-    for (int x= st; x<chicken.size(); x++) {
-        if (!chicken[x].visited) {
-            chicken[x].visited = true;
-            selectChicken(x, lev+1);
-            chicken[x].visited = false;
-        }
-    }
-
-
 }
 int main() {
 
-    //1. 입력
-    cin >> n >> m; //도시n개 치킨집m개
-    int flag;
-    for (int y = 0; y < n; y++) {
-        for (int x = 0; x < n; x++) {
-            cin >> flag;
-            if (flag==1) home.push_back({y,x});
-            else if (flag==2) chicken.push_back({y,x,false});
-        }
-    }
-
-    //2. 연산
-    selectChicken(0,0);
-
-
-    cout << minCityDistance << endl;
-
+   cin >> n;
+    nqueen(0);
+    cout << tot<<endl;
     return 0;
 }
