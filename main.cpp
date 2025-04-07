@@ -1,42 +1,74 @@
-// 백준 G_4_9663
-// *** 꼭 다시 한번 풀어보기!!!
-
-// 룰 : 같은 행 || 같은 열 || 대각선에 퀸이 존재하면 안됨!!!
+// 백준 S_4_2578
 
 #include <iostream>
-#include<cstdlib>
+
 using namespace std;
-int col[15]; // col[i] = i번째 행에 놓은 퀸의 열(column) 위치
-int n, tot; //체스판의 크기, 가능한 경우의 수
+int bingo[5][5];
+bool check[5][5];
+int line;
 
-bool check(int lev) {
-    for (int x=0; x<lev; x++) {
-        //대각선이거나 같은 라인인지 확인
-        if (col[x] == col[lev] || abs(col[lev]- col[x]) == lev-x ) return false;
+void iS_bingo(int yy, int xx) {
+    int i;
 
-        // col[i]가 의미하는 것이 x좌표, i가 의미하는 것 y좌표이므로 차이가 일정하다면 대각선에 있다는 것을 알 수 있다.
+    //가로
+    for (i = 0; i < 5; i++) {
+        if (!check[yy][i]) break;
     }
-    return true;
+    if (i == 5) line++;
 
+    //세로
+    for (i = 0; i < 5; i++) {
+        if (!check[i][xx]) break;
+    }
+
+    if (i == 5) line++;
+
+    //대각선 1
+    if (yy == xx) {
+        for (i = 0; i < 5; i++) {
+            if (!check[i][i]) break;
+        }
+        if (i == 5) line++;
+    }
+
+    //대각선 2
+    if (yy == (4 - xx)) {
+        for (i = 0; i < 5; i++) {
+            if (!check[i][4 - i]) break;
+        }
+        if (i == 5) line++;
+    }
 }
 
-void nqueen(int x) {
-    if (x == n) {
-        tot ++;
-    }
-    else {
-        for (int i=0; i<n; i++) {
-            col[x] = i; //해당 위치에 퀸을 배치
-            if (check(x)) {
-                nqueen(x+1);
+void checking(int target) {
+    for (int y = 0; y < 5; y++) {
+        for (int x = 0; x < 5; x++) {
+            if (bingo[y][x] == target) {
+                check[y][x] = true;
+                iS_bingo(y, x);
+                return;
             }
         }
     }
 }
-int main() {
 
-   cin >> n;
-    nqueen(0);
-    cout << tot<<endl;
+int main() {
+    for (int y = 0; y < 5; y++) {
+        for (int x = 0; x < 5; x++) {
+            cin >> bingo[y][x];
+        }
+    }
+
+    int num;
+    int cnt = 0;
+
+    for (cnt = 1; cnt<=25; cnt++) {
+        cin >> num;
+        checking(num);
+        if (line >= 3) break; //빙고 조건
+    }
+
+    cout << cnt;
+
     return 0;
 }
