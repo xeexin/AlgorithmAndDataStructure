@@ -1,50 +1,44 @@
-// 백준 S_4_10825
+// 백준 S_2_108870
 
 /*
-    N명의 이름과 국어, 영어, 수학 점수
+    Xi를 좌표 압축한 결과 X'i의 값은 Xi > Xj를 만족하는 서로 다른 좌표 Xj의 개수와 같아야 한다.
 
-    국어 점수가 감소하는 순서로
-    국어 점수가 같으면 영어 점수가 증가하는 순서로
-    국어 점수와 영어 점수가 같으면 수학 점수가 감소하는 순서로
-    모든 점수가 같으면 이름이 사전 순으로 증가하는 순서로 (단, 아스키 코드에서 대문자는 소문자보다 작으므로 사전순으로 앞에 온다.)
+[2 4 -10 4 -9]
+
+-10 -9 2 4 4  -> 정렬
+ 2  3  0 3 1  -> 압축 (예. 2보다 작은게 2개, 4보다 작은게 3개, -10보다 작은거 0개...)
+
+
 */
 
 #include <iostream>
+#include <unordered_map>
 #include <vector>
 #include <algorithm>
 using namespace std;
-struct node {
-    string name;
-    int kor;
-    int eng;
-    int math;
-};
-bool cmp(node a, node b) {
-   //  국어 점수 내림차순
-    if (a.kor != b.kor) { return a.kor > b.kor; }
-   // 국어 같으면 영어 점수 오름차순
-    if (a.eng != b.eng) { return a.eng < b.eng; }
-   // 국어와 영어 같으면 수학 점수 내림차순
-    if (a.math != b.math) { return a.math > b.math; }
-   // 모두 같으면 이름 사전순 오름차순 (대문자 < 소문자, 아스키 순)
-    return a.name < b.name;
-}
+
 int main() {
     int n;
     cin >> n;
-    vector<node> v(n);
-    for (int x=0; x<n; x++) {
-        cin >> v[x].name;
-        cin >> v[x].kor;
-        cin >> v[x].eng;
-        cin >> v[x].math;
+    vector<int> v(n); // 원본
+
+    for (int i = 0; i < n; i++) {
+        cin >> v[i];
     }
 
-    //정렬 후 이름 출력
-    sort(v.begin(), v.end(), cmp);
+    vector<int> vv(v); // vv에 v복사
+
+    sort(vv.begin(), vv.end()); // 오름차순 정렬
+
+    vv.erase(unique(vv.begin(), vv.end()), vv.end()); //중복 제거 + 중복 숫자 뒤로 밀림
+
+    unordered_map<int, int> um;
+    for (int x=0; x<vv.size(); x++) {
+        um[vv[x]]=x;
+    }
 
     for (int x=0; x<n; x++) {
-        cout << v[x].name << "\n";  // endl 대신 -> "\n" 사용하기! (속도 문제)
+        cout << um[v[x]] << " ";
     }
 
     return 0;
