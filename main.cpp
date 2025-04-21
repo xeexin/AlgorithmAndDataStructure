@@ -1,4 +1,4 @@
-// 백준 G_5_2170
+// 백준 G_5_2230
 
 /*
 
@@ -12,42 +12,36 @@
 using namespace std;
 
 int main() {
-    //속도 향상
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n;
-    cin >> n; //4
+    int n, m;
+    cin >> n >> m;
 
-    vector<pair<int, int> > line(n);
-
+    int arr[n];
     for (int x = 0; x < n; x++) {
-        cin >> line[x].first >> line[x].second;
+        cin >> arr[x];
     }
 
-    sort(line.begin(), line.end()); // 정렬
+    sort(arr, arr + n); // 정렬 1 3 5
 
+    int MIN = 21e8;
+    int st = 0;
+    int ed = 0;
 
-    int st = line[0].first;
-    int ed = line[0].second;
-    int ret = 0;
+    while (ed < n) {
+        int diff = arr[ed] - arr[st];
 
-    for (int x = 1; x < n; x++) {
-        int s = line[x].first;
-        int e = line[x].second;
-
-        if (ed >= s) {
-            ed = max(ed,e); //겹치면 확장
+        if (diff < m) {
+            ed++;
         } else {
-            ret += (ed - st); // 끊기면 누적
-            st = s;
-            ed = e;
+            MIN = min(MIN, diff);
+            st++;
         }
     }
 
-    ret += (ed - st);
 
-    cout << ret ;
+    cout << MIN;
 
     return 0;
 }
