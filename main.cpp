@@ -1,49 +1,56 @@
-// 백준 S_2_1654
+// 백준 S_4_1920
 
 /*
-
-오영식 k개의 랜선 (길이 제각각)
-박성원  N개의 랜선
-
-k개의 랜선으로 n개의 랜선을 만들쟈 (이때 최대 랜선 길이를 구하시오)
+존재하면 1을, 존재하지 않으면 0을 출력
 
 */
 
+#include <algorithm>
 #include <iostream>
 #include <vector>
 using namespace std;
+int n,m;
+vector<int> v1;
+void binary_search(int target) {
+    int st = 0;
+    int ed = n-1;
+    int mid;
 
+    while (st <= ed) {
+        mid= (st+ed)/2;
+
+        if (v1[mid] == target) {
+            cout << 1 << "\n";
+            return;
+        }else if (v1[mid] > target) {
+            ed = mid - 1;
+        }else {
+            st = mid + 1;
+        }
+    }
+    cout << 0 << "\n";
+}
 int main() {
+
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int k, n;
-    cin >> k >> n; // 4 11
-    int max_len = 0;
-
-    vector<int> v(k);
-    for (int i = 0; i < k; i++) {
-        cin >> v[i]; // 802 743 457 539
-        max_len = max(max_len, v[i]);
+    cin >>n; //5
+    int k;
+    for(int x=0;x<n;x++) {
+        cin >> k;
+        v1.push_back(k); //4 1 5 2 3
     }
 
-    long long left = 1; // 0으로 못 나눔!
-    long long right = max_len; //802
-    long long mid = (left + right) / 2; //401
+    //정렬
+    sort(v1.begin(),v1.end()); // 1 2 3 4 5
 
-    while (left <= right) {
-        int cnt = 0;
-        for (int x = 0; x < k; x++) {
-            cnt += v[x] / mid;
-        }
-
-        if (cnt >= n) left = mid + 1; //왜냐 최대길이를 구해야 함으로
-        else right = mid - 1;
-        mid = (left + right) / 2;
+    cin>>m; //5
+    int target;
+    for (int x=0; x<m; x++) {
+        cin >> target;
+        binary_search(target);
     }
-
-    cout << mid << endl;
-
 
     return 0;
 }
