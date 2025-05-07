@@ -1,0 +1,16 @@
+# CMake & CLion
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+build/
+build.ninja
+*.ninja
+Testing/
+
+# IDE metadata
+.idea/
+*.iml
+
+# macOS
+.DS_Store
