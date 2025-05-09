@@ -1,16 +1,24 @@
-# CMake & CLion
-cmake-build-*/
-CMakeFiles/
+# CMake build artifacts
+cmake-build-debug/
 CMakeCache.txt
+CMakeFiles/
+Makefile
 cmake_install.cmake
-build/
-build.ninja
-*.ninja
-Testing/
+rules.ninja
+TargetDirectories.txt
+CMakeConfigureLog.yaml
 
-# IDE metadata
+# Compiler outputs
+*.o
+*.obj
+*.exe
+
+# IDE specific files
+clion-environment.txt
+clion-log.txt
 .idea/
-*.iml
 
-# macOS
-.DS_Store
+# Temporary files
+*.tmp
+*.log
+*.bak
