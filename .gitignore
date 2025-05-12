@@ -22,3 +22,9 @@ clion-log.txt
 *.tmp
 *.log
 *.bak
+
+# CMake misc
+cmake.check_cache
+
+# CLion logs
+clion-Debug-log.txt
