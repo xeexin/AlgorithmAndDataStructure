@@ -1,0 +1,14 @@
+//
+// Created by 임희진 on 5/13/25.
+//
+
+#ifndef ALGORITHMANDDATASTRUCTURE_S_3_2579_H
+#define ALGORITHMANDDATASTRUCTURE_S_3_2579_H
+
+
+class S_3_2579 {
+
+};
+
+
+#endif //ALGORITHMANDDATASTRUCTURE_S_3_2579_H
