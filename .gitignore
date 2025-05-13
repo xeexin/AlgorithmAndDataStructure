@@ -28,3 +28,11 @@ cmake.check_cache
 
 # CLion logs
 clion-Debug-log.txt
+
+# 확장자 없는 실행 파일만 무시 (S_로 시작하고 확장자 없는 파일)
+S_[0-9]*
+G_[0-9]*
+
+# 예외 처리: 소스파일(.cpp, .h)은 포함
+!*.cpp
+!*.h
