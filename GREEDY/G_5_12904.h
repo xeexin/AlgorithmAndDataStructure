@@ -1,0 +1,14 @@
+//
+// Created by 임희진 on 6/3/25.
+//
+
+#ifndef ALGORITHMANDDATASTRUCTURE_G_5_12904_H
+#define ALGORITHMANDDATASTRUCTURE_G_5_12904_H
+
+
+class G_5_12904 {
+
+};
+
+
+#endif //ALGORITHMANDDATASTRUCTURE_G_5_12904_H
