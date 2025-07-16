@@ -2,7 +2,7 @@
 // Created by kosa on 25. 7. 7.
 //
 
-#include "S_1_2512.h"
+#include "../BinarySearch//S_1_2512.h"
 #include<iostream>
 #include<algorithm>
 #include<vector>

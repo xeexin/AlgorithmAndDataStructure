@@ -2,7 +2,7 @@
 // Created by kosa on 25. 7. 15.
 //
 
-#include "G_5_3020.h"
+#include "../BinarySearch//G_5_3020.h"
 #include<iostream>
 #include<algorithm>
 #include<vector>
