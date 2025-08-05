@@ -10,9 +10,9 @@ using namespace std;
 
 // 공유기 간의 최소 거리가 dist일 때, 설치 가능한 공유기 개수를 반환하는 함수
 int canInstall(const vector<int> &v, int dist) { //수정이 필요 없으면 const 꼭 붙이는 게 좋음!
-    
+
     int cnt = 1; // 첫집에 무조건 설치됨으로
-    int last = v[0];
+    int last = v[0]; // 마지막으로 설치한 공유기 위치를 기록
     for (int x = 1; x < v.size(); x++) {
         if (v[x] - last >= dist) {
             cnt++;
