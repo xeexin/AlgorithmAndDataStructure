@@ -1,38 +1,47 @@
 # CMake build artifacts
-cmake-build-debug/
+cmake-build-*/
+build/
+out/
 CMakeCache.txt
 CMakeFiles/
-Makefile
 cmake_install.cmake
-rules.ninja
-TargetDirectories.txt
-CMakeConfigureLog.yaml
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
 
 # Compiler outputs
 *.o
 *.obj
 *.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
 
-# IDE specific files
-clion-environment.txt
-clion-log.txt
+# IDE specific files (CLion)
 .idea/
+cmake-build-debug/
+cmake-build-release/
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
 
 # Temporary files
 *.tmp
 *.log
 *.bak
+*.swp
+*~
 
-# CMake misc
-cmake.check_cache
-
-# CLion logs
-clion-Debug-log.txt
-
-# 확장자 없는 실행 파일만 무시 (S_로 시작하고 확장자 없는 파일)
+# 확장자 없는 실행 파일
 S_[0-9]*
 G_[0-9]*
-
-# 예외 처리: 소스파일(.cpp, .h)은 포함
 !*.cpp
 !*.h
