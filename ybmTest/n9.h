@@ -1,0 +1,14 @@
+//
+// Created by 임희진 on 11/4/25.
+//
+
+#ifndef ALGORITHMANDDATASTRUCTURE_N9_H
+#define ALGORITHMANDDATASTRUCTURE_N9_H
+
+
+class n9 {
+
+};
+
+
+#endif //ALGORITHMANDDATASTRUCTURE_N9_H
